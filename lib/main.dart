@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/pages/login/login_usuario.dart';
+import 'package:on_health_app/pages/login/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: false,
       ),
-      home: const LoginUsuario(),
+      home: const Login(),
     );
   }
 }

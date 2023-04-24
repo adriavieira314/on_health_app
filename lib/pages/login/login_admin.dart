@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginUsuario extends StatefulWidget {
-  const LoginUsuario({super.key});
+class LoginAdmin extends StatefulWidget {
+  const LoginAdmin({super.key});
 
   @override
-  State<LoginUsuario> createState() => _LoginUsuarioState();
+  State<LoginAdmin> createState() => _LoginAdminState();
 }
 
-class _LoginUsuarioState extends State<LoginUsuario> {
+class _LoginAdminState extends State<LoginAdmin> {
   final _passwordFocus = FocusNode();
   final _formData = <String, Object>{};
   final _formKey = GlobalKey<FormState>();
@@ -41,7 +41,7 @@ class _LoginUsuarioState extends State<LoginUsuario> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, bottom: 8.0),
                   child: Text(
-                    'Número do CPF',
+                    'Login',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -51,18 +51,18 @@ class _LoginUsuarioState extends State<LoginUsuario> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Digite o seu CPF',
+                    hintText: 'Digite o seu usuario',
                     border: OutlineInputBorder(),
                   ),
                   textInputAction: TextInputAction.next,
-                  onSaved: (cpf) => _formData['cpf'] = cpf ?? '',
+                  onSaved: (user) => _formData['user'] = user ?? '',
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocus);
                   },
                   validator: (value) {
-                    final cpf = value ?? '';
+                    final user = value ?? '';
 
-                    if (cpf.trim().isEmpty) {
+                    if (user.trim().isEmpty) {
                       return 'Campo obrigatório.';
                     }
 
@@ -82,7 +82,7 @@ class _LoginUsuarioState extends State<LoginUsuario> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, bottom: 8.0),
                   child: Text(
-                    'Senha de acesso',
+                    'Senha',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -113,48 +113,21 @@ class _LoginUsuarioState extends State<LoginUsuario> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(
-                      (mediaQuery.size.width * 0.5) - 23,
-                      45,
-                    ),
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    elevation: 8,
-                    shadowColor: Colors.grey,
-                  ),
-                  onPressed: () => {},
-                  child: Text(
-                    'Cadastrar',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 18.0,
-                    ),
-                  ),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(mediaQuery.size.width, 45),
+                elevation: 8,
+                shadowColor: Colors.grey,
+              ),
+              onPressed: _submitForm,
+              child: const Text(
+                'Entrar',
+                style: TextStyle(
+                  fontSize: 18.0,
                 ),
-                const SizedBox(width: 10.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(
-                      (mediaQuery.size.width * 0.5) - 23,
-                      45,
-                    ),
-                    elevation: 8,
-                    shadowColor: Colors.grey,
-                  ),
-                  onPressed: _submitForm,
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
