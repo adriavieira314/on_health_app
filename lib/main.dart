@@ -12,9 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'On Health',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade900),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green.shade900,
+          secondary: Colors.white,
+        ),
         useMaterial3: false,
       ),
       home: const LoginUsuario(),
