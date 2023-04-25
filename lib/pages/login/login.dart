@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    double safeAreaHeight = MediaQuery.of(context).padding.top;
+    double safeAreaHeight = mediaQuery.padding.top;
 
     return Scaffold(
       body: SafeArea(
