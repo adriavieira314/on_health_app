@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/pages/login/login_admin.dart';
-import 'package:on_health_app/pages/login/login_usuario.dart';
+import 'package:on_health_app/pages/login/login_user.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
