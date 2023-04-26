@@ -121,7 +121,7 @@ class _LoginUsuarioState extends State<LoginUsuario> {
                       (mediaQuery.size.width * 0.5) - 23,
                       45,
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: Colors.white,
                     elevation: 8,
                     shadowColor: Colors.grey,
                   ),

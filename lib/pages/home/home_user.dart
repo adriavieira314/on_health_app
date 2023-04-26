@@ -7,9 +7,7 @@ class HomeUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-
-    final Map<String, String> user_info = userInfo;
+    final Map<String, String> info = userInfo;
 
     return Scaffold(
       body: Column(
@@ -22,27 +20,27 @@ class HomeUser extends StatelessWidget {
               children: [
                 TextInfo(
                   label: 'Nascimento: ',
-                  info: user_info['birthdate']!,
+                  info: info['birthdate']!,
                 ),
                 const Divider(),
                 TextInfo(
                   label: 'IMC: ',
-                  info: user_info['imc']!,
+                  info: info['imc']!,
                 ),
                 const Divider(),
                 TextInfo(
                   label: 'Mãe: ',
-                  info: user_info['parent']!,
+                  info: info['parent']!,
                 ),
                 const Divider(),
                 TextInfo(
                   label: 'Endereço: ',
-                  info: user_info['street']!,
+                  info: info['street']!,
                 ),
                 const Divider(),
                 TextInfo(
                   label: 'Bairro: ',
-                  info: user_info['address']!,
+                  info: info['address']!,
                 ),
               ],
             ),
@@ -108,27 +106,27 @@ class HomeUser extends StatelessWidget {
                           children: [
                             TextInfo(
                               label: 'Unidade de Saúde: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Médico: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Último atendimento: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Valor da glicemia: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Medicação recebida: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                           ],
                         ),
@@ -136,27 +134,27 @@ class HomeUser extends StatelessWidget {
                           children: [
                             TextInfo(
                               label: 'Unidade de Saúde: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Médico: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Último atendimento: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Valor da glicemia: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Medicação recebida: ',
-                              info: user_info['address']!,
+                              info: info['address']!,
                             ),
                           ],
                         ),

@@ -55,8 +55,7 @@ class _LoginState extends State<Login> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(200, 50),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
+                          backgroundColor: Colors.white,
                           elevation: 8,
                           shadowColor: Colors.grey,
                         ),
@@ -86,8 +85,7 @@ class _LoginState extends State<Login> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(200, 50),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
+                            backgroundColor: Colors.white,
                             elevation: 8,
                             shadowColor: Colors.grey,
                           ),

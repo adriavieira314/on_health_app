@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: false,
       ),
-      home: const MainComponent(),
+      home: const Login(),
     );
   }
 }
@@ -45,7 +45,7 @@ class _MainComponentState extends State<MainComponent> {
       style: optionStyle,
     ),
   ];
-  final Map<String, String> user_info = userInfo;
+  final Map<String, String> info = userInfo;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -62,14 +62,14 @@ class _MainComponentState extends State<MainComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              user_info['nome']!,
+              info['nome']!,
               style: const TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'CPF: ${user_info['cpf']!}',
+              'CPF: ${info['cpf']!}',
               style: const TextStyle(
                 fontSize: 20.0,
               ),
