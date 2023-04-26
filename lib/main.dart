@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/components/app_drawer.dart';
 import 'package:on_health_app/data/dumb_data.dart';
 import 'package:on_health_app/pages/home/home_user.dart';
 import 'package:on_health_app/pages/login/login.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: false,
       ),
-      home: const Login(),
+      home: const MainComponent(),
     );
   }
 }
@@ -46,6 +47,7 @@ class _MainComponentState extends State<MainComponent> {
     ),
   ];
   final Map<String, String> info = userInfo;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onItemTapped(int index) {
     setState(() {
@@ -56,22 +58,30 @@ class _MainComponentState extends State<MainComponent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         toolbarHeight: 80,
+        leading: IconButton(
+          icon: const Icon(Icons.menu, size: 30),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               info['nome']!,
               style: const TextStyle(
-                fontSize: 22.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
-              'CPF: ${info['cpf']!}',
-              style: const TextStyle(
-                fontSize: 20.0,
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(
+                'CPF: ${info['cpf']!}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                ),
               ),
             ),
           ],
@@ -96,6 +106,7 @@ class _MainComponentState extends State<MainComponent> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      drawer: const AppDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         items: const <BottomNavigationBarItem>[
