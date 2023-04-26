@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/utils/app_routes.dart';
 
 class LoginUsuario extends StatefulWidget {
   const LoginUsuario({super.key});
@@ -21,6 +22,7 @@ class _LoginUsuarioState extends State<LoginUsuario> {
 
     _formKey.currentState?.save();
     print(_formData);
+    Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
   }
 
   @override
