@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/home/text_info.dart';
+import 'package:on_health_app/data/dumb_data.dart';
 
 class HomeUser extends StatelessWidget {
   const HomeUser({super.key});
@@ -8,53 +9,9 @@ class HomeUser extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
-    final Map<String, String> user_info = {
-      'nome': 'José Maria de Souza',
-      'cpf': '000.000.000-00',
-      'birthdate': '12/01/1956',
-      'imc': '(sendentarismo/odesidade) CID/CIAP',
-      'parent': 'Maria de Cassia Rodrigues',
-      'street': 'Rua Antonio Batista da Silva, 440',
-      'address': 'Centro - João Pessoa/PB',
-    };
+    final Map<String, String> user_info = userInfo;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              user_info['nome']!,
-              style: const TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'CPF: ${user_info['cpf']!}',
-              style: const TextStyle(
-                fontSize: 20.0,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.blue.shade50,
-              radius: 25,
-              child: const Text('AH'),
-            ),
-          )
-        ],
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
