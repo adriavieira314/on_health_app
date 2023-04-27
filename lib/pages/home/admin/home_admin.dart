@@ -54,7 +54,13 @@ class _HomeAdminState extends State<HomeAdmin> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    title: const Text('Nome da Unidade'),
+                    title: const Text(
+                      'Nome da Unidade',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     trailing: ElevatedButton(
                       onPressed: () {},
                       child: const Text('Alterar'),
