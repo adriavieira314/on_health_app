@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                     ),
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: _isAdmin
                             ? const LoginAdmin()
                             : const LoginUsuario(),
