@@ -22,6 +22,7 @@ class _LoginUsuarioState extends State<LoginUsuario> {
 
     _formKey.currentState?.save();
     print(_formData);
+    FocusManager.instance.primaryFocus?.unfocus();
     Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
   }
 
