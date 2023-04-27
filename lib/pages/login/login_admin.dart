@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/utils/app_routes.dart';
 
 class LoginAdmin extends StatefulWidget {
   const LoginAdmin({super.key});
@@ -21,6 +22,8 @@ class _LoginAdminState extends State<LoginAdmin> {
 
     _formKey.currentState?.save();
     print(_formData);
+    FocusManager.instance.primaryFocus?.unfocus();
+    Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_ADMIN);
   }
 
   @override
