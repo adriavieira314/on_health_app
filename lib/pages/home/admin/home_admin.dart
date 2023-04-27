@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/components/app_bar_component.dart';
+import 'package:on_health_app/components/app_drawer.dart';
 import 'package:on_health_app/models/list_of_patients.dart';
 
 class HomeAdmin extends StatefulWidget {
@@ -9,6 +11,7 @@ class HomeAdmin extends StatefulWidget {
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ListOfPatients> _agendamentos = [
     ListOfPatients(
       date: "15/03/2023",
@@ -39,6 +42,9 @@ class _HomeAdminState extends State<HomeAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBarComponent(scaffoldKey: _scaffoldKey),
+      drawer: const AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 18.0),
         child: Column(
