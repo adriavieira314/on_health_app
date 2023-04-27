@@ -46,7 +46,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
           child: CircleAvatar(
             backgroundColor: Theme.of(context).colorScheme.secondary,
             radius: 25,
-            child: const Text('AH'),
+            child: const Icon(Icons.person),
           ),
         )
       ],
