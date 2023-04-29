@@ -17,7 +17,7 @@ class _MenuAdminState extends State<MenuAdmin> {
     Graph(),
   ];
 
-  final Map<String, String> info = userInfo;
+  final Map<String, dynamic> info = userInfo;
 
   void _onItemTapped(int index) {
     setState(() {

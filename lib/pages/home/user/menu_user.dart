@@ -19,7 +19,7 @@ class _MenuUserState extends State<MenuUser> {
     AgendamentosUser(),
   ];
 
-  final Map<String, String> info = userInfo;
+  final Map<String, dynamic> info = userInfo;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _onItemTapped(int index) {

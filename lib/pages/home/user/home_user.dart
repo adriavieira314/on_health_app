@@ -7,7 +7,7 @@ class HomeUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> info = userInfo;
+    final Map<String, dynamic> info = userInfo;
 
     return Scaffold(
       body: Column(

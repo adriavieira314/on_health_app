@@ -11,7 +11,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String> info = userInfo;
+    final Map<String, dynamic> info = userInfo;
 
     return AppBar(
       toolbarHeight: 80,
