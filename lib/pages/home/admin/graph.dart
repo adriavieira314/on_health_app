@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:on_health_app/components/app_graph.dart';
 
 class ChartData {
   ChartData(this.x, this.y);
@@ -94,38 +94,19 @@ class _GraphState extends State<Graph> {
                   ),
                 ),
                 Container(
-                  height: 400, //height of TabBarView
+                  height: 600, //height of TabBarView
                   decoration: const BoxDecoration(
                     // color: Colors.red,
                     border: Border(
                       top: BorderSide(color: Colors.grey, width: 0.5),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 20.0),
                     child: TabBarView(
                       children: [
-                        SfCartesianChart(
-                          primaryXAxis: CategoryAxis(),
-                          series: <ChartSeries<ChartData, String>>[
-                            ColumnSeries<ChartData, String>(
-                              color: Colors.redAccent,
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y,
-                            )
-                          ],
-                        ),
-                        SfCartesianChart(
-                          primaryXAxis: CategoryAxis(),
-                          series: <ChartSeries<ChartData, String>>[
-                            ColumnSeries<ChartData, String>(
-                              dataSource: chartData,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y,
-                            )
-                          ],
-                        ),
+                        AppGraph(graphValue: 60.0),
+                        AppGraph(graphValue: 40.0),
                       ],
                     ),
                   ),
