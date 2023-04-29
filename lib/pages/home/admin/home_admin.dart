@@ -118,11 +118,14 @@ class _HomeAdminState extends State<HomeAdmin> {
                                     radius: 20,
                                     child: const Icon(Icons.person),
                                   ),
-                                  title: Text(
-                                    patient!.name ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 17.0,
-                                      fontWeight: FontWeight.bold,
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      patient!.name ?? '',
+                                      style: const TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   subtitle: Column(
