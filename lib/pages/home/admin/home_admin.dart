@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_health_app/components/app_bar_component.dart';
 import 'package:on_health_app/components/app_drawer.dart';
 import 'package:on_health_app/models/list_of_patients.dart';
+import 'package:on_health_app/utils/app_routes.dart';
 
 class HomeAdmin extends StatefulWidget {
   const HomeAdmin({super.key});
@@ -158,7 +159,10 @@ class _HomeAdminState extends State<HomeAdmin> {
                                   ),
                                   trailing: TextButton(
                                     child: const Text('Ver mais'),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed(AppRoutes.PATIENT_INFO);
+                                    },
                                   ),
                                 ),
                               ],
