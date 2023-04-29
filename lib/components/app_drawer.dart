@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/utils/app_routes.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -27,6 +28,17 @@ class AppDrawer extends StatelessWidget {
               'Conta',
               style: TextStyle(fontSize: 18.0),
             ),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout, size: 30.0),
+            title: const Text(
+              'Logout',
+              style: TextStyle(fontSize: 18.0),
+            ),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
+            },
           ),
         ],
       ),
