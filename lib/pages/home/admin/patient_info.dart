@@ -22,8 +22,15 @@ class PatientInfo extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: Theme.of(context).colorScheme.secondary,
-                  radius: 25,
+                  radius: 30,
                   child: const Icon(Icons.person),
+                ),
+                Text(
+                  info['nome'],
+                  style: const TextStyle(
+                    fontSize: 19.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextInfo(
                   label: 'Valor da glicemia: ',
