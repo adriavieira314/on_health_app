@@ -22,14 +22,14 @@ class TextInfo extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              fontSize: 19.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             info,
             style: const TextStyle(
-              fontSize: 17.0,
+              fontSize: 16.0,
             ),
           ),
         ],

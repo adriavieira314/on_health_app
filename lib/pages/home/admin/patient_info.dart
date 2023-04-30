@@ -28,7 +28,7 @@ class PatientInfo extends StatelessWidget {
                 Text(
                   info['nome'],
                   style: const TextStyle(
-                    fontSize: 19.0,
+                    fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
