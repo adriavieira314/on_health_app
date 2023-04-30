@@ -94,7 +94,7 @@ class _GraphState extends State<Graph> {
                   ),
                 ),
                 Container(
-                  height: 450, //height of TabBarView
+                  height: 400, //height of TabBarView
                   decoration: const BoxDecoration(
                     // color: Colors.red,
                     border: Border(

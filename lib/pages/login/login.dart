@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
                     Image.asset(
                       'assets/images/logo_1.png',
                       width: 300,
-                      height: 300,
+                      height: 220,
                     ),
                     Center(
                       child: Padding(

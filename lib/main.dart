@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/pages/home/admin/menu_admin.dart';
-import 'package:on_health_app/pages/home/admin/patient_info.dart';
+import 'package:on_health_app/components/patient_info.dart';
 import 'package:on_health_app/pages/home/user/menu_user.dart';
 import 'package:on_health_app/pages/login/login.dart';
 import 'package:on_health_app/utils/app_routes.dart';
