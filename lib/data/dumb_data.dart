@@ -18,4 +18,6 @@ final userInfo = {
     "doctor": "Thais Silva",
     "speciality": "Cardiologista",
   },
+  "glicemia": '100 mg/dl',
+  "medication": 'Teste teste',
 };

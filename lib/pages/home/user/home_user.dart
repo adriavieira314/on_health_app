@@ -106,27 +106,27 @@ class HomeUser extends StatelessWidget {
                           children: [
                             TextInfo(
                               label: 'Unidade de Saúde: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['ubs']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Médico: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['doctor']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Último atendimento: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['date']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Valor da glicemia: ',
-                              info: info['address']!,
+                              info: info['glicemia']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Medicação recebida: ',
-                              info: info['address']!,
+                              info: info['medication']!,
                             ),
                           ],
                         ),
@@ -134,27 +134,27 @@ class HomeUser extends StatelessWidget {
                           children: [
                             TextInfo(
                               label: 'Unidade de Saúde: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['ubs']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Médico: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['doctor']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Último atendimento: ',
-                              info: info['address']!,
+                              info: info['lastAppointment']!['date']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Valor da glicemia: ',
-                              info: info['address']!,
+                              info: info['glicemia']!,
                             ),
                             const Divider(),
                             TextInfo(
                               label: 'Medicação recebida: ',
-                              info: info['address']!,
+                              info: info['medication']!,
                             ),
                           ],
                         ),
