@@ -10,7 +10,7 @@ class AgendamentosUser extends StatelessWidget {
       itemCount: 3,
       itemBuilder: (BuildContext context, int index) {
         return Card(
-          elevation: 5,
+          elevation: 3,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Column(

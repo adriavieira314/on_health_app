@@ -66,7 +66,7 @@ class _GraphState extends State<Graph> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.bloodtype),
+                              child: Icon(Icons.bloodtype_outlined),
                             ),
                             Text(
                               'Diabetes',
@@ -81,7 +81,7 @@ class _GraphState extends State<Graph> {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.bloodtype),
+                              child: Icon(Icons.monitor_heart_outlined),
                             ),
                             Text(
                               'Hipertensão',
