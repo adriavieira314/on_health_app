@@ -6,64 +6,79 @@ class AgendamentosUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10),
       itemCount: 3,
       itemBuilder: (BuildContext context, int index) {
         return Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.date_range),
-                  ],
-                ),
-                title: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Column(
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const ListTile(
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.date_range),
+                    ],
+                  ),
+                  title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Clínico Geral',
+                        'Especialidade: Clínico Geral',
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text(
-                        'Adriano Silva',
+                        'Médico: Adriano Silva',
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
+                      SizedBox(height: 10.0),
+                    ],
+                  ),
+                  subtitle: Text(
+                    'Data: 27/04/2023',
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => {},
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size(100, 40),
+                        ),
+                        child: const Text('Confirmar'),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: () => {},
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          minimumSize: const Size(100, 40),
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                        ),
+                        child: const Text('Cancelar'),
+                      ),
                     ],
                   ),
                 ),
-                subtitle: const Text(
-                  '27/04/2023',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => {},
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                        minimumSize: const Size(120, 50),
-                      ),
-                      child: const Text('Confirmar'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
