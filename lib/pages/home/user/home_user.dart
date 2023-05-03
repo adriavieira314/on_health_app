@@ -19,7 +19,8 @@ class _HomeUserState extends State<HomeUser> {
   showNotification() {
     valor = !valor;
     if (valor) {
-      Provider.of<NotificationService>(context, listen: false).showNotification(
+      Provider.of<NotificationService>(context, listen: false)
+          .showNotificationScheduled(
         CustomNotification(
           id: 1,
           title: 'Teste',

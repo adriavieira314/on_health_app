@@ -69,6 +69,33 @@ class NotificationService {
     );
   }
 
+  showNotificationScheduled(CustomNotification notification) {
+    final date = DateTime.now().add(const Duration(seconds: 5));
+
+    androidDetails = const AndroidNotificationDetails(
+      'lembretes_notifications_x',
+      'Lembretes',
+      channelDescription: 'Este canala é para lembretes',
+      importance: Importance.max, //importancia da notificacao
+      priority: Priority.max,
+      enableVibration: true,
+    );
+
+    localNotificationsPlugin.zonedSchedule(
+      notification.id,
+      notification.title,
+      notification.body,
+      tz.TZDateTime.from(date, tz.local),
+      NotificationDetails(
+        android: androidDetails,
+      ),
+      payload: notification.payload,
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
+  }
+
   checkForNotifications() async {
     // ao abrir o aplicativo, verifica se existe notificações - getNotificationAppLaunchDetails -
     // e chama o metedo _onSelectedNotification para levar o usuario a pagina destinada á notificações
