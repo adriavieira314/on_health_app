@@ -1,9 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/home/text_info.dart';
 import 'package:on_health_app/data/dumb_data.dart';
+import 'package:on_health_app/models/custom_notification.dart';
+import 'package:on_health_app/services/notification_service.dart';
+import 'package:on_health_app/utils/app_routes.dart';
+import 'package:provider/provider.dart';
 
-class HomeUser extends StatelessWidget {
+class HomeUser extends StatefulWidget {
   const HomeUser({super.key});
+
+  @override
+  State<HomeUser> createState() => _HomeUserState();
+}
+
+class _HomeUserState extends State<HomeUser> {
+  bool valor = false;
+
+  showNotification() {
+    valor = !valor;
+    if (valor) {
+      Provider.of<NotificationService>(context, listen: false).showNotification(
+        CustomNotification(
+          id: 1,
+          title: 'Teste',
+          body: 'Acesse o app!',
+          payload: AppRoutes.PATIENT_INFO,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +69,15 @@ class HomeUser extends StatelessWidget {
                     info: info['address']!,
                   ),
                 ],
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: const Text('Lembrar-me mais tarde'),
+                trailing: valor
+                    ? Icon(Icons.check_box, color: Colors.amber.shade600)
+                    : const Icon(Icons.check_box_outline_blank),
+                onTap: showNotification,
               ),
             ),
             DefaultTabController(
