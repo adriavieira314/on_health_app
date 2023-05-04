@@ -12,7 +12,7 @@ class AgendamentosUser extends StatelessWidget {
         return Card(
           elevation: 3,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -49,32 +49,6 @@ class AgendamentosUser extends StatelessWidget {
                       fontSize: 15.0,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => {},
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                          minimumSize: const Size(100, 40),
-                        ),
-                        child: const Text('Confirmar'),
-                      ),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: () => {},
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                          minimumSize: const Size(100, 40),
-                          backgroundColor: Theme.of(context).colorScheme.error,
-                        ),
-                        child: const Text('Cancelar'),
-                      ),
-                    ],
                   ),
                 ),
               ],
