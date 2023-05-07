@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/utils/app_routes.dart';
+import 'package:on_health_app/exceptions/http_exception.dart';
+import 'package:on_health_app/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginUsuario extends StatefulWidget {
   const LoginUsuario({super.key});
@@ -10,10 +12,29 @@ class LoginUsuario extends StatefulWidget {
 
 class _LoginUsuarioState extends State<LoginUsuario> {
   final _passwordFocus = FocusNode();
-  final _formData = <String, Object>{};
   final _formKey = GlobalKey<FormState>();
+  final Map<String?, dynamic> _formData = {
+    'cpf': '',
+    'password': '',
+  };
 
-  void _submitForm() {
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ocorreu um Erro'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitForm() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
@@ -21,9 +42,22 @@ class _LoginUsuarioState extends State<LoginUsuario> {
     }
 
     _formKey.currentState?.save();
-    print(_formData);
+    AuthProvider auth = Provider.of(context, listen: false);
+
+    try {
+      await auth.loginUser(
+        _formData['cpf']!,
+        _formData['password']!,
+      );
+    } on HttpException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog(
+          'Ocorreu um erro no processo. Entre em contato com suporte técnico.');
+    }
+
     FocusManager.instance.primaryFocus?.unfocus();
-    Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
+    // Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
   }
 
   @override

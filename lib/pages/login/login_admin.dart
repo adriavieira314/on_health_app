@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/utils/app_routes.dart';
+import 'package:on_health_app/exceptions/http_exception.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/auth_provider.dart';
 
 class LoginAdmin extends StatefulWidget {
   const LoginAdmin({super.key});
@@ -10,10 +13,29 @@ class LoginAdmin extends StatefulWidget {
 
 class _LoginAdminState extends State<LoginAdmin> {
   final _passwordFocus = FocusNode();
-  final _formData = <String, Object>{};
   final _formKey = GlobalKey<FormState>();
+  final Map<String?, dynamic> _formData = {
+    'cpf': '',
+    'password': '',
+  };
 
-  void _submitForm() {
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ocorreu um Erro'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitForm() async {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
@@ -21,9 +43,21 @@ class _LoginAdminState extends State<LoginAdmin> {
     }
 
     _formKey.currentState?.save();
-    print(_formData);
+    AuthProvider auth = Provider.of(context, listen: false);
+
+    try {
+      await auth.loginAdmin(
+        _formData['cpf']!,
+        _formData['password']!,
+      );
+    } on HttpException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog(
+          'Ocorreu um erro no processo. Entre em contato com suporte técnico.');
+    }
+
     FocusManager.instance.primaryFocus?.unfocus();
-    Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_ADMIN);
   }
 
   @override
@@ -54,11 +88,11 @@ class _LoginAdminState extends State<LoginAdmin> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Digite o seu usuario',
+                    hintText: 'Digite o seu cpf',
                     border: OutlineInputBorder(),
                   ),
                   textInputAction: TextInputAction.next,
-                  onSaved: (user) => _formData['user'] = user ?? '',
+                  onSaved: (user) => _formData['cpf'] = user ?? '',
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocus);
                   },
