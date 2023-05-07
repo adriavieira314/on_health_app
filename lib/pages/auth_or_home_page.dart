@@ -16,10 +16,16 @@ class AuthOrHomePage extends StatelessWidget {
       future: auth.tryAutoLogout(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Scaffold(
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         } else if (snapshot.error != null) {
-          return const Center(
-            child: Text('Ocorreu um erro!'),
+          return Scaffold(
+            body: const Center(
+              child: Text('Ocorreu um erro!'),
+            ),
           );
         } else if (snapshot.data == true) {
           return auth.isAdmin ? MenuAdminPage() : MenuUserPage();
