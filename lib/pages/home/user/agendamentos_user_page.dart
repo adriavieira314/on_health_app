@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AgendamentosUser extends StatelessWidget {
-  const AgendamentosUser({super.key});
+class AgendamentosUserPage extends StatelessWidget {
+  const AgendamentosUserPage({super.key});
 
   @override
   Widget build(BuildContext context) {

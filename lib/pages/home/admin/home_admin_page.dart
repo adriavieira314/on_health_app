@@ -1,28 +1,17 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/app_bar_component.dart';
 import 'package:on_health_app/components/app_drawer.dart';
 import 'package:on_health_app/models/list_of_patients.dart';
 import 'package:on_health_app/utils/app_routes.dart';
 
-class ScaleSize {
-  static double textScaleFactor(BuildContext context,
-      {double maxTextScaleFactor = 2}) {
-    final width = MediaQuery.of(context).size.width;
-    double val = (width / 1400) * maxTextScaleFactor;
-    return max(1, min(val, maxTextScaleFactor));
-  }
-}
-
-class HomeAdmin extends StatefulWidget {
-  const HomeAdmin({super.key});
+class HomeAdminPage extends StatefulWidget {
+  const HomeAdminPage({super.key});
 
   @override
-  State<HomeAdmin> createState() => _HomeAdminState();
+  State<HomeAdminPage> createState() => _HomeAdminPageState();
 }
 
-class _HomeAdminState extends State<HomeAdmin> {
+class _HomeAdminPageState extends State<HomeAdminPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<ListOfPatients> _agendamentos = [
     ListOfPatients(

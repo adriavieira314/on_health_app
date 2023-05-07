@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/exceptions/http_exception.dart';
+import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/auth_provider.dart';
-
-class LoginAdmin extends StatefulWidget {
-  const LoginAdmin({super.key});
+class LoginUsuarioPage extends StatefulWidget {
+  const LoginUsuarioPage({super.key});
 
   @override
-  State<LoginAdmin> createState() => _LoginAdminState();
+  State<LoginUsuarioPage> createState() => _LoginUsuarioPageState();
 }
 
-class _LoginAdminState extends State<LoginAdmin> {
+class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
   final _passwordFocus = FocusNode();
   final _formKey = GlobalKey<FormState>();
   final Map<String?, dynamic> _formData = {
@@ -46,7 +45,7 @@ class _LoginAdminState extends State<LoginAdmin> {
     AuthProvider auth = Provider.of(context, listen: false);
 
     try {
-      await auth.loginAdmin(
+      await auth.loginUser(
         _formData['cpf']!,
         _formData['password']!,
       );
@@ -58,6 +57,7 @@ class _LoginAdminState extends State<LoginAdmin> {
     }
 
     FocusManager.instance.primaryFocus?.unfocus();
+    // Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
   }
 
   @override
@@ -78,7 +78,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, bottom: 8.0),
                   child: Text(
-                    'Login',
+                    'Número do CPF',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -88,18 +88,18 @@ class _LoginAdminState extends State<LoginAdmin> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'Digite o seu cpf',
+                    hintText: 'Digite o seu CPF',
                     border: OutlineInputBorder(),
                   ),
                   textInputAction: TextInputAction.next,
-                  onSaved: (user) => _formData['cpf'] = user ?? '',
+                  onSaved: (cpf) => _formData['cpf'] = cpf ?? '',
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocus);
                   },
                   validator: (value) {
-                    final user = value ?? '';
+                    final cpf = value ?? '';
 
-                    if (user.trim().isEmpty) {
+                    if (cpf.trim().isEmpty) {
                       return 'Campo obrigatório.';
                     }
 
@@ -119,7 +119,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, bottom: 8.0),
                   child: Text(
-                    'Senha',
+                    'Senha de acesso',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -150,21 +150,48 @@ class _LoginAdminState extends State<LoginAdmin> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(mediaQuery.size.width, 45),
-                elevation: 8,
-                shadowColor: Colors.grey,
-              ),
-              onPressed: _submitForm,
-              child: const Text(
-                'Entrar',
-                style: TextStyle(
-                  fontSize: 18.0,
+            child: Row(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(
+                      (mediaQuery.size.width * 0.5) - 23,
+                      45,
+                    ),
+                    backgroundColor: Colors.white,
+                    elevation: 8,
+                    shadowColor: Colors.grey,
+                  ),
+                  onPressed: () => {},
+                  child: Text(
+                    'Cadastrar',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 18.0,
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(width: 10.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(
+                      (mediaQuery.size.width * 0.5) - 23,
+                      45,
+                    ),
+                    elevation: 8,
+                    shadowColor: Colors.grey,
+                  ),
+                  onPressed: _submitForm,
+                  child: const Text(
+                    'Entrar',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+          )
         ],
       ),
     );

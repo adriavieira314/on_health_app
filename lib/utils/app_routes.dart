@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/patient_info.dart';
-import 'package:on_health_app/pages/home/admin/menu_admin.dart';
-import 'package:on_health_app/pages/home/user/menu_user.dart';
-import 'package:on_health_app/pages/login/login.dart';
+import 'package:on_health_app/pages/home/admin/menu_admin_page.dart';
+import 'package:on_health_app/pages/home/user/menu_user_page.dart';
+import 'package:on_health_app/pages/login/login_page.dart';
 
 class AppRoutes {
   static const LOGIN = '/';
@@ -16,9 +16,9 @@ class AppRoutes {
 class Routes {
   static Map<String, Widget Function(BuildContext)> list =
       <String, WidgetBuilder>{
-    AppRoutes.LOGIN: (ctx) => const Login(),
-    AppRoutes.HOME_USER: (ctx) => const MenuUser(),
-    AppRoutes.HOME_ADMIN: (ctx) => const MenuAdmin(),
+    AppRoutes.LOGIN: (ctx) => const LoginPage(),
+    AppRoutes.HOME_USER: (ctx) => const MenuUserPage(),
+    AppRoutes.HOME_ADMIN: (ctx) => const MenuAdminPage(),
     AppRoutes.PATIENT_INFO: (ctx) => const PatientInfo(),
   };
 

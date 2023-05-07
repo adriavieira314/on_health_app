@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:on_health_app/components/app_bar_component.dart';
 import 'package:on_health_app/components/app_drawer.dart';
 import 'package:on_health_app/data/dumb_data.dart';
-import 'package:on_health_app/pages/home/user/agendamentos_user.dart';
-import 'package:on_health_app/pages/home/user/home_user.dart';
+import 'package:on_health_app/pages/home/user/agendamentos_user_page.dart';
+import 'package:on_health_app/pages/home/user/home_user_page.dart';
 
-class MenuUser extends StatefulWidget {
-  const MenuUser({super.key});
+class MenuUserPage extends StatefulWidget {
+  const MenuUserPage({super.key});
 
   @override
-  State<MenuUser> createState() => _MenuUserState();
+  State<MenuUserPage> createState() => _MenuUserPageState();
 }
 
-class _MenuUserState extends State<MenuUser> {
+class _MenuUserPageState extends State<MenuUserPage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeUser(),
-    AgendamentosUser(),
+    HomeUserPage(),
+    AgendamentosUserPage(),
   ];
 
   final Map<String, dynamic> info = userInfo;

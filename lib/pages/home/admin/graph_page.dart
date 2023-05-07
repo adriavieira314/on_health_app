@@ -7,14 +7,14 @@ class ChartData {
   final double y;
 }
 
-class Graph extends StatefulWidget {
-  const Graph({super.key});
+class GraphPage extends StatefulWidget {
+  const GraphPage({super.key});
 
   @override
-  State<Graph> createState() => _GraphState();
+  State<GraphPage> createState() => _GraphPageState();
 }
 
-class _GraphState extends State<Graph> {
+class _GraphPageState extends State<GraphPage> {
   final List<ChartData> chartData = [
     ChartData('Jan', 10),
     ChartData('Fev', 11),

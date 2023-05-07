@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/data/dumb_data.dart';
-import 'package:on_health_app/pages/home/admin/graph.dart';
-import 'package:on_health_app/pages/home/admin/home_admin.dart';
+import 'package:on_health_app/pages/home/admin/graph_page.dart';
+import 'package:on_health_app/pages/home/admin/home_admin_page.dart';
 
-class MenuAdmin extends StatefulWidget {
-  const MenuAdmin({super.key});
+class MenuAdminPage extends StatefulWidget {
+  const MenuAdminPage({super.key});
 
   @override
-  State<MenuAdmin> createState() => _MenuAdminState();
+  State<MenuAdminPage> createState() => _MenuAdminPageState();
 }
 
-class _MenuAdminState extends State<MenuAdmin> {
+class _MenuAdminPageState extends State<MenuAdminPage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeAdmin(),
-    Graph(),
+    HomeAdminPage(),
+    GraphPage(),
   ];
 
   final Map<String, dynamic> info = userInfo;

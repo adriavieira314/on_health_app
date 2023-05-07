@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/pages/login/login_admin.dart';
-import 'package:on_health_app/pages/login/login_user.dart';
+import 'package:on_health_app/pages/login/login_admin_page.dart';
+import 'package:on_health_app/pages/login/login_user_page.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
   bool _isAdmin = false;
 
   void _changeLogin() {
@@ -42,8 +42,8 @@ class _LoginState extends State<Login> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                         child: _isAdmin
-                            ? const LoginAdmin()
-                            : const LoginUsuario(),
+                            ? const LoginAdminPage()
+                            : const LoginUsuarioPage(),
                       ),
                     ),
                   ],

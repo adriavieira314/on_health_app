@@ -6,14 +6,14 @@ import 'package:on_health_app/services/notification_service.dart';
 import 'package:on_health_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
-class HomeUser extends StatefulWidget {
-  const HomeUser({super.key});
+class HomeUserPage extends StatefulWidget {
+  const HomeUserPage({super.key});
 
   @override
-  State<HomeUser> createState() => _HomeUserState();
+  State<HomeUserPage> createState() => _HomeUserPageState();
 }
 
-class _HomeUserState extends State<HomeUser> {
+class _HomeUserPageState extends State<HomeUserPage> {
   bool valor = false;
 
   showNotification() {
