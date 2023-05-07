@@ -57,7 +57,6 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
     }
 
     FocusManager.instance.primaryFocus?.unfocus();
-    // Navigator.of(context).pushReplacementNamed(AppRoutes.HOME_USER);
   }
 
   @override

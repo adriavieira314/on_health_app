@@ -20,7 +20,11 @@ class AuthProvider with ChangeNotifier {
   String? _dsCBO;
 
   bool get hasToken {
-    return _token != null;
+    return _token != null && _token != '';
+  }
+
+  bool get isAdmin {
+    return _cnes != null && _cnes != '';
   }
 
   Future<void> _authenticate(
@@ -89,6 +93,23 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> tryAutoLogin() async {
+    if (hasToken) return;
+
+    final userData = await Store.getMap('userData');
+    if (userData.isEmpty) return;
+
+    _token = userData['token'] ?? '';
+    _cpf = userData['cpf'] ?? '';
+    _dtNasc = userData['dtNasc'] ?? '';
+    _nome = userData['nome'] ?? '';
+    _nomeMae = userData['nomeMae'] ?? '';
+    _endereco = userData['endereco'] ?? '';
+    _imc = userData['imc'] ?? 0.0;
+    _classImc = userData['classImc'] ?? '';
+    _cnes = userData['cnes'] ?? '';
+    _unidadeSaude = userData['unidadeSaude'] ?? '';
+    _dsCBO = userData['dsCBO'] ?? '';
+
     _autoLogout();
     notifyListeners();
   }
