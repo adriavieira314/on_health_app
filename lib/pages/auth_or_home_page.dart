@@ -13,7 +13,7 @@ class AuthOrHomePage extends StatelessWidget {
     AuthProvider auth = Provider.of(context);
 
     return FutureBuilder(
-      future: auth.tryAutoLogin(),
+      future: auth.tryAutoLogout(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -21,12 +21,10 @@ class AuthOrHomePage extends StatelessWidget {
           return const Center(
             child: Text('Ocorreu um erro!'),
           );
+        } else if (snapshot.data == true) {
+          return auth.isAdmin ? MenuAdminPage() : MenuUserPage();
         } else {
-          return auth.hasToken
-              ? auth.isAdmin
-                  ? MenuAdminPage()
-                  : MenuUserPage()
-              : const LoginPage();
+          return const LoginPage();
         }
       },
     );

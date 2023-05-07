@@ -75,7 +75,6 @@ class AuthProvider with ChangeNotifier {
         'dsCBO': _dsCBO,
       });
 
-      _autoLogout();
       notifyListeners();
     } else if (response.statusCode == 404) {
       throw HttpException(body['message']);
@@ -92,11 +91,9 @@ class AuthProvider with ChangeNotifier {
     return _authenticate(cpf, password, 'cidadao');
   }
 
-  Future<void> tryAutoLogin() async {
-    if (hasToken) return;
-
+  Future<bool> tryAutoLogout() async {
     final userData = await Store.getMap('userData');
-    if (userData.isEmpty) return;
+    if (userData.isEmpty) return false;
 
     _token = userData['token'] ?? '';
     _cpf = userData['cpf'] ?? '';
@@ -110,8 +107,24 @@ class AuthProvider with ChangeNotifier {
     _unidadeSaude = userData['unidadeSaude'] ?? '';
     _dsCBO = userData['dsCBO'] ?? '';
 
-    _autoLogout();
-    notifyListeners();
+    final url =
+        'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(utf8.decode(response.bodyBytes));
+      //salvar os dados do usuario
+    }
+
+    return response.statusCode == 401 ? false : true;
   }
 
   void logout() {
@@ -129,6 +142,4 @@ class AuthProvider with ChangeNotifier {
 
     Store.remove('userData');
   }
-
-  void _autoLogout() {}
 }
