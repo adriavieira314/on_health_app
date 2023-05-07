@@ -7,17 +7,31 @@ import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
+        ),
+        Provider<NotificationService>(
+          create: (context) => NotificationService(),
+        ),
+      ],
+      child: App(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class App extends StatefulWidget {
+  const App({
+    super.key,
+  });
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<App> createState() => _AppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
@@ -31,29 +45,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => AuthProvider(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'On Health',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green.shade900,
+          secondary: Colors.blue.shade50,
         ),
-        Provider<NotificationService>(
-          create: (context) => NotificationService(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'On Health',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.green.shade900,
-            secondary: Colors.blue.shade50,
-          ),
-          useMaterial3: false,
-        ),
-        routes: Routes.list,
-        initialRoute: Routes.initial,
-        navigatorKey: Routes.navigatorKey,
+        useMaterial3: false,
       ),
+      routes: Routes.list,
+      initialRoute: Routes.initial,
+      navigatorKey: Routes.navigatorKey,
     );
   }
 }
