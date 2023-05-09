@@ -23,8 +23,8 @@ class AuthOrHomePage extends StatelessWidget {
           );
         } else if (snapshot.error != null) {
           return Scaffold(
-            body: const Center(
-              child: Text('Ocorreu um erro!'),
+            body: Center(
+              child: Text('Ocorreu um erro!, ${snapshot.error}'),
             ),
           );
         } else if (snapshot.data == true) {

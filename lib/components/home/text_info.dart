@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextInfo extends StatelessWidget {
   final String label;
-  final String info;
+  final String? info;
   final MainAxisAlignment? mainAxisAlignment;
 
   const TextInfo({
@@ -27,7 +27,7 @@ class TextInfo extends StatelessWidget {
             ),
           ),
           Text(
-            info,
+            info!,
             style: const TextStyle(
               fontSize: 16.0,
             ),

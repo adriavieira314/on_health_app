@@ -18,6 +18,9 @@ class AuthProvider with ChangeNotifier {
   String? _cnes;
   String? _unidadeSaude;
   String? _dsCBO;
+  dynamic _dadosHipertensao;
+  dynamic _dadosDiabetes;
+  dynamic _userData;
 
   bool get hasToken {
     return _token != null && _token != '';
@@ -26,6 +29,12 @@ class AuthProvider with ChangeNotifier {
   bool get isAdmin {
     return _cnes != null && _cnes != '';
   }
+
+  get dadosHipertensao => _dadosHipertensao;
+
+  get dadosDiabetes => _dadosDiabetes;
+
+  get userData => _userData;
 
   Future<void> _authenticate(
     String cpf,
@@ -92,20 +101,20 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<bool> tryAutoLogout() async {
-    final userData = await Store.getMap('userData');
-    if (userData.isEmpty) return false;
+    _userData = await Store.getMap('userData');
+    if (_userData.isEmpty) return false;
 
-    _token = userData['token'] ?? '';
-    _cpf = userData['cpf'] ?? '';
-    _dtNasc = userData['dtNasc'] ?? '';
-    _nome = userData['nome'] ?? '';
-    _nomeMae = userData['nomeMae'] ?? '';
-    _endereco = userData['endereco'] ?? '';
-    _imc = userData['imc'] ?? 0.0;
-    _classImc = userData['classImc'] ?? '';
-    _cnes = userData['cnes'] ?? '';
-    _unidadeSaude = userData['unidadeSaude'] ?? '';
-    _dsCBO = userData['dsCBO'] ?? '';
+    _token = _userData['token'] ?? '';
+    _cpf = _userData['cpf'] ?? '';
+    _dtNasc = _userData['dtNasc'] ?? '';
+    _nome = _userData['nome'] ?? '';
+    _nomeMae = _userData['nomeMae'] ?? '';
+    _endereco = _userData['endereco'] ?? '';
+    _imc = _userData['imc'] ?? 0.0;
+    _classImc = _userData['classImc'] ?? '';
+    _cnes = _userData['cnes'] ?? '';
+    _unidadeSaude = _userData['unidadeSaude'] ?? '';
+    _dsCBO = _userData['dsCBO'] ?? '';
 
     final url =
         'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
@@ -119,12 +128,16 @@ class AuthProvider with ChangeNotifier {
       },
     );
 
-    if (response.statusCode == 200) {
-      final body = jsonDecode(utf8.decode(response.bodyBytes));
-      //salvar os dados do usuario
+    if (response.statusCode == 401 || response.statusCode != 200) {
+      logout();
+      return false;
     }
 
-    return response.statusCode == 401 ? false : true;
+    final body = jsonDecode(utf8.decode(response.bodyBytes));
+    _dadosHipertensao = body['hipertensao'];
+    _dadosDiabetes = body['diabetes'];
+
+    return true;
   }
 
   void logout() {
