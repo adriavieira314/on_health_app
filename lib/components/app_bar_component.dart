@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:on_health_app/utils/capitalize.dart';
 
 class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -25,7 +26,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            userInfo['nome']!,
+            '${userInfo['nome']!}'.capitalizeByWord(),
             style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
