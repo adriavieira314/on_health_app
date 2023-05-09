@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/data/dumb_data.dart';
+import 'package:on_health_app/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -11,7 +12,8 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> info = userInfo;
+    final provider = Provider.of<AuthProvider>(context);
+    final userInfo = provider.userData;
 
     return AppBar(
       toolbarHeight: 80,
@@ -23,7 +25,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            info['nome']!,
+            userInfo['nome']!,
             style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
@@ -32,7 +34,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: Text(
-              'CPF: ${info['cpf']!}',
+              'CPF: ${userInfo['cpf']!}',
               style: const TextStyle(
                 fontSize: 16.0,
               ),
