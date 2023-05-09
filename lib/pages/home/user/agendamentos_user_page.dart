@@ -1,59 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/models/agendamentos.dart';
+import 'package:on_health_app/providers/agendamentos_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:on_health_app/utils/capitalize.dart';
 
-class AgendamentosUserPage extends StatelessWidget {
+class AgendamentosUserPage extends StatefulWidget {
   const AgendamentosUserPage({super.key});
 
   @override
+  State<AgendamentosUserPage> createState() => _AgendamentosUserPageState();
+}
+
+class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<AgendamentosProvider>(
+      context,
+      listen: false,
+    ).loadAgendamentos();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final listaAgendamentos = Provider.of<AgendamentosProvider>(
+      context,
+      listen: false,
+    ).listaAgendamentos;
+
     return ListView.builder(
       padding: const EdgeInsets.all(10),
-      itemCount: 3,
+      itemCount: listaAgendamentos!.agendamentos!.length,
       itemBuilder: (BuildContext context, int index) {
-        return Card(
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const ListTile(
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.date_range),
-                    ],
-                  ),
-                  title: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Especialidade: Clínico Geral',
+        Lista lista = listaAgendamentos.agendamentos![index];
+
+        return ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: lista.agendamentos!.length,
+          itemBuilder: (BuildContext context, int index) {
+            Agendamentos agendamento = lista.agendamentos![index];
+
+            return Card(
+              elevation: 3,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      leading: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.date_range),
+                        ],
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Text(
+                            'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                        ],
+                      ),
+                      subtitle: Text(
+                        'Data: ${agendamento.dtAgenda}',
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text(
-                        'Médico: Adriano Silva',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                    ],
-                  ),
-                  subtitle: Text(
-                    'Data: 27/04/2023',
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

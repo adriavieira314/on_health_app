@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/services/notification_service.dart';
 import 'package:on_health_app/utils/app_routes.dart';
@@ -12,6 +13,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AgendamentosProvider(),
         ),
         Provider<NotificationService>(
           create: (context) => NotificationService(),
