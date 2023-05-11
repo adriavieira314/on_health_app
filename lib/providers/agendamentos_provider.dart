@@ -19,7 +19,7 @@ class AgendamentosProvider with ChangeNotifier {
   Future<void> loadAgendamentosUsuario() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.43.231:8080/onhealth/rest/consultas/cidadao/proximosatendimentos?cpf=$_cpf',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/proximosatendimentos?cpf=$_cpf',
       ),
       headers: {
         "Accept": "application/json",
@@ -39,8 +39,8 @@ class AgendamentosProvider with ChangeNotifier {
   Future<void> loadAgendamentosGestor() async {
     final response = await http.get(
       Uri.parse(
-        // 'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=$_cnes',
-        'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=2708868',
+        // 'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=$_cnes',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",

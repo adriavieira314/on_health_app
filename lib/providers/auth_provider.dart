@@ -54,7 +54,7 @@ class AuthProvider with ChangeNotifier {
     String urlFragment,
   ) async {
     final url =
-        'http://192.168.43.231:8080/onhealth/rest/consultas/$urlFragment/login';
+        'http://192.168.0.103:8080/onhealth/rest/consultas/$urlFragment/login';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -129,7 +129,7 @@ class AuthProvider with ChangeNotifier {
     _dsCBO = _userData['dsCBO'] ?? '';
 
     final url =
-        'http://192.168.43.231:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
+        'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
 
     final response = await http.get(
       Uri.parse(url),

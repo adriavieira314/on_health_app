@@ -22,7 +22,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesUnidade() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",
@@ -47,7 +47,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesGeral() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}',
       ),
       headers: {
         "Accept": "application/json",
@@ -69,7 +69,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoUnidade() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",
@@ -91,7 +91,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoGeral() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.43.231:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}',
+        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}',
       ),
       headers: {
         "Accept": "application/json",
