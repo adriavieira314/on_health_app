@@ -100,6 +100,7 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocus);
                   },
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     final cpf = value ?? '';
 
@@ -139,6 +140,7 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
                   onSaved: (password) => _formData['password'] = password ?? '',
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     final password = value ?? '';
 

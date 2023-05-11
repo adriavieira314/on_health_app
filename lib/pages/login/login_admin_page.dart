@@ -101,6 +101,7 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                   onFieldSubmitted: (_) {
                     FocusScope.of(context).requestFocus(_passwordFocus);
                   },
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     final user = value ?? '';
 
@@ -140,6 +141,7 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
                   onSaved: (password) => _formData['password'] = password ?? '',
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     final password = value ?? '';
 
