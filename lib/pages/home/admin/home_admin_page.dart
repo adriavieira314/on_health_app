@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/app_bar_component.dart';
 import 'package:on_health_app/components/app_drawer.dart';
-import 'package:on_health_app/models/list_of_patients.dart';
+import 'package:on_health_app/models/agendamentos.dart';
+import 'package:on_health_app/providers/agendamentos_provider.dart';
+import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/utils/app_routes.dart';
+import 'package:provider/provider.dart';
 
 class HomeAdminPage extends StatefulWidget {
   const HomeAdminPage({super.key});
@@ -13,35 +16,27 @@ class HomeAdminPage extends StatefulWidget {
 
 class _HomeAdminPageState extends State<HomeAdminPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<ListOfPatients> _agendamentos = [
-    ListOfPatients(
-      date: "15/03/2023",
-      patients: [
-        Patient(age: 25, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 30, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-      ],
-    ),
-    ListOfPatients(
-      date: "16/03/2023",
-      patients: [
-        Patient(age: 59, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 2),
-        Patient(age: 20, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 60, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-      ],
-    ),
-    ListOfPatients(
-      date: "17/03/2023",
-      patients: [
-        Patient(age: 18, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 5, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-        Patient(age: 2, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 2),
-        Patient(age: 5, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-      ],
-    ),
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<AgendamentosProvider>(
+      context,
+      listen: false,
+    ).loadAgendamentosGestor();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    ).userData;
+    final listaAgendamentos = Provider.of<AgendamentosProvider>(
+      context,
+      listen: false,
+    ).listaAgendamentosGestor;
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBarComponent(scaffoldKey: _scaffoldKey),
@@ -56,8 +51,8 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                 children: [
                   ListTile(
                     title: Center(
-                      child: const Text(
-                        'Nome da Unidade',
+                      child: Text(
+                        userInfo['unidadeSaude'],
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
@@ -80,31 +75,34 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
             ),
             Expanded(
               child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: _agendamentos.length,
+                itemCount: listaAgendamentos!.agendamentos!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final item = _agendamentos[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          tileColor: Colors.grey.shade200,
-                          title: Row(
-                            children: [
-                              const Text(
-                                'Pacientes do dia: ',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                  Lista lista = listaAgendamentos.agendamentos![index];
+
+                  return Column(
+                    children: [
+                      ListTile(
+                        tileColor: Colors.grey.shade200,
+                        title: Row(
+                          children: [
+                            Text(
+                              'Pacientes do dia: ',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(item.date!),
-                            ],
-                          ),
+                            ),
+                            Text(lista.dtAgenda!),
+                          ],
                         ),
-                        Column(
-                            children: item.patients!.map((patient) {
+                      ),
+                      ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: lista.agendamentos!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          Agendamentos agendamento = lista.agendamentos![index];
+
                           return Card(
                             elevation: 0,
                             child: Column(
@@ -120,7 +118,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                   title: Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      patient!.name ?? '',
+                                      agendamento.nome!,
                                       style: const TextStyle(
                                         fontSize: 17.0,
                                         fontWeight: FontWeight.bold,
@@ -132,7 +130,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'IMC: ${patient.imc}',
+                                        'IMC: ${agendamento.imc}',
                                         style: const TextStyle(
                                           fontSize: 15.0,
                                         ),
@@ -144,11 +142,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: patient.confirmation == 0
-                                              ? Colors.green
-                                              : patient.confirmation == 1
-                                                  ? Colors.orange
-                                                  : Colors.red,
+                                          color: Colors.red,
                                         ),
                                         height: 10,
                                         width: 50,
@@ -166,10 +160,66 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                               ],
                             ),
                           );
-                        }).toList()),
-                      ],
-                    ),
+                        },
+                      ),
+                    ],
                   );
+
+                  // return ListView.builder(
+                  //   scrollDirection: Axis.vertical,
+                  //   shrinkWrap: true,
+                  //   itemCount: lista.agendamentos!.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     Agendamentos agendamento = lista.agendamentos![index];
+
+                  //     return Card(
+                  //       elevation: 3,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  //         child: Column(
+                  //           mainAxisSize: MainAxisSize.min,
+                  //           children: [
+                  //             ListTile(
+                  //               leading: Column(
+                  //                 mainAxisAlignment: MainAxisAlignment.center,
+                  //                 children: [
+                  //                   Icon(Icons.date_range),
+                  //                 ],
+                  //               ),
+                  //               title: Column(
+                  //                 crossAxisAlignment: CrossAxisAlignment.start,
+                  //                 children: [
+                  //                   Text(
+                  //                     'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
+                  //                     style: TextStyle(
+                  //                       fontSize: 18.0,
+                  //                       fontWeight: FontWeight.w500,
+                  //                     ),
+                  //                   ),
+                  //                   Text(
+                  //                     'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
+                  //                     style: TextStyle(
+                  //                       fontSize: 16.0,
+                  //                       fontWeight: FontWeight.w400,
+                  //                     ),
+                  //                   ),
+                  //                   SizedBox(height: 10.0),
+                  //                 ],
+                  //               ),
+                  //               subtitle: Text(
+                  //                 'Data: ${agendamento.dtAgenda}',
+                  //                 style: TextStyle(
+                  //                   fontSize: 15.0,
+                  //                   fontWeight: FontWeight.w500,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // );
                 },
               ),
             )

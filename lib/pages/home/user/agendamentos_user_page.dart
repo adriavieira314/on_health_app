@@ -18,7 +18,7 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
     Provider.of<AgendamentosProvider>(
       context,
       listen: false,
-    ).loadAgendamentos();
+    ).loadAgendamentosUsuario();
   }
 
   @override
@@ -26,7 +26,7 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
     final listaAgendamentos = Provider.of<AgendamentosProvider>(
       context,
       listen: false,
-    ).listaAgendamentos;
+    ).listaAgendamentosUsuario;
 
     return ListView.builder(
       padding: const EdgeInsets.all(10),
