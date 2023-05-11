@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:on_health_app/exceptions/http_exception.dart';
 import 'package:provider/provider.dart';
 
@@ -48,6 +50,8 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
     _formKey.currentState?.save();
     AuthProvider auth = Provider.of(context, listen: false);
 
+    _formData['cpf'] = _formData['cpf'].replaceAll(new RegExp(r'[^\w\s]+'), '');
+
     try {
       await auth.loginAdmin(
         _formData['cpf']!,
@@ -96,6 +100,11 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                     hintText: 'Digite o seu cpf',
                     border: OutlineInputBorder(),
                   ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CpfInputFormatter(),
+                    LengthLimitingTextInputFormatter(14)
+                  ],
                   textInputAction: TextInputAction.next,
                   onSaved: (user) => _formData['cpf'] = user ?? '',
                   onFieldSubmitted: (_) {
@@ -138,6 +147,7 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                     hintText: 'Digite a sua senha',
                     border: OutlineInputBorder(),
                   ),
+                  inputFormatters: [LengthLimitingTextInputFormatter(8)],
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
                   onSaved: (password) => _formData['password'] = password ?? '',

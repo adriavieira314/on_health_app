@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:on_health_app/exceptions/http_exception.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 class LoginUsuarioPage extends StatefulWidget {
   const LoginUsuarioPage({super.key});
@@ -47,6 +49,8 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
 
     _formKey.currentState?.save();
     AuthProvider auth = Provider.of(context, listen: false);
+
+    _formData['cpf'] = _formData['cpf'].replaceAll(new RegExp(r'[^\w\s]+'), '');
 
     try {
       await auth.loginUser(
@@ -95,6 +99,11 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
                     hintText: 'Digite o seu CPF',
                     border: OutlineInputBorder(),
                   ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CpfInputFormatter(),
+                    LengthLimitingTextInputFormatter(14)
+                  ],
                   textInputAction: TextInputAction.next,
                   onSaved: (cpf) => _formData['cpf'] = cpf ?? '',
                   onFieldSubmitted: (_) {
@@ -137,6 +146,7 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
                     hintText: 'Digite a sua senha',
                     border: OutlineInputBorder(),
                   ),
+                  inputFormatters: [LengthLimitingTextInputFormatter(8)],
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
                   onSaved: (password) => _formData['password'] = password ?? '',

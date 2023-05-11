@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:on_health_app/utils/capitalize.dart';
+import 'package:on_health_app/utils/cpf_format.dart';
 
 class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -35,7 +36,7 @@ class AppBarComponent extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.only(top: 5.0),
             child: Text(
-              'CPF: ${userInfo['cpf']!}',
+              'CPF: ${CPF.format(userInfo['cpf']!)}',
               style: const TextStyle(
                 fontSize: 16.0,
               ),
