@@ -12,13 +12,19 @@ class AgendamentosUserPage extends StatefulWidget {
 }
 
 class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
+  bool loading = true;
+
   @override
   void initState() {
     super.initState();
     Provider.of<AgendamentosProvider>(
       context,
       listen: false,
-    ).loadAgendamentosUsuario();
+    ).loadAgendamentosUsuario().then((value) {
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -28,75 +34,79 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
       listen: true,
     ).listaAgendamentosUsuario;
 
-    return listaAgendamentos == null
+    return loading
         ? Center(
-            child: Text(
-              'Sem agendamentos',
-              style: TextStyle(fontSize: 16),
-            ),
+            child: CircularProgressIndicator(),
           )
-        : ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: listaAgendamentos.agendamentos!.length,
-            itemBuilder: (BuildContext context, int index) {
-              Lista lista = listaAgendamentos.agendamentos![index];
-
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: lista.agendamentos!.length,
+        : listaAgendamentos == null
+            ? Center(
+                child: Text(
+                  'Sem agendamentos',
+                  style: TextStyle(fontSize: 16),
+                ),
+              )
+            : ListView.builder(
+                padding: const EdgeInsets.all(10),
+                itemCount: listaAgendamentos.agendamentos!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Agendamentos agendamento = lista.agendamentos![index];
+                  Lista lista = listaAgendamentos.agendamentos![index];
 
-                  return Card(
-                    elevation: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ListTile(
-                            leading: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.date_range),
-                              ],
-                            ),
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: lista.agendamentos!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Agendamentos agendamento = lista.agendamentos![index];
+
+                      return Card(
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                leading: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.date_range),
+                                  ],
+                                ),
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Profissional: ${agendamento.nmProfSaude!.capitalizeByWord()}',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                  ],
+                                ),
+                                subtitle: Text(
+                                  'Data: ${agendamento.dtAgenda}',
                                   style: TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 15.0,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Text(
-                                  'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                SizedBox(height: 10.0),
-                              ],
-                            ),
-                            subtitle: Text(
-                              'Data: ${agendamento.dtAgenda}',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   );
                 },
               );
-            },
-          );
   }
 }

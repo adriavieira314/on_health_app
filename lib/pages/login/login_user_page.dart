@@ -13,6 +13,8 @@ class LoginUsuarioPage extends StatefulWidget {
 class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
   final _passwordFocus = FocusNode();
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+
   final Map<String?, dynamic> _formData = {
     'cpf': '',
     'password': '',
@@ -41,6 +43,8 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
       return;
     }
 
+    setState(() => _isLoading = true);
+
     _formKey.currentState?.save();
     AuthProvider auth = Provider.of(context, listen: false);
 
@@ -56,6 +60,7 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
           'Ocorreu um erro no processo. Entre em contato com suporte técnico.');
     }
 
+    setState(() => _isLoading = false);
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
@@ -171,23 +176,32 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
                   ),
                 ),
                 const SizedBox(width: 10.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(
-                      (mediaQuery.size.width * 0.5) - 23,
-                      45,
+                if (_isLoading)
+                  SizedBox(
+                    width: (mediaQuery.size.width * 0.5) - 23,
+                    height: 45,
+                    child: Center(
+                      child: const CircularProgressIndicator(),
                     ),
-                    elevation: 8,
-                    shadowColor: Colors.grey,
-                  ),
-                  onPressed: _submitForm,
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(
-                      fontSize: 18.0,
+                  )
+                else
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                        (mediaQuery.size.width * 0.5) - 23,
+                        45,
+                      ),
+                      elevation: 8,
+                      shadowColor: Colors.grey,
+                    ),
+                    onPressed: _submitForm,
+                    child: const Text(
+                      'Entrar',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           )
