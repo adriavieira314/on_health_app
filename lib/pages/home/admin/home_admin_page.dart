@@ -164,62 +164,6 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                       ),
                     ],
                   );
-
-                  // return ListView.builder(
-                  //   scrollDirection: Axis.vertical,
-                  //   shrinkWrap: true,
-                  //   itemCount: lista.agendamentos!.length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     Agendamentos agendamento = lista.agendamentos![index];
-
-                  //     return Card(
-                  //       elevation: 3,
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  //         child: Column(
-                  //           mainAxisSize: MainAxisSize.min,
-                  //           children: [
-                  //             ListTile(
-                  //               leading: Column(
-                  //                 mainAxisAlignment: MainAxisAlignment.center,
-                  //                 children: [
-                  //                   Icon(Icons.date_range),
-                  //                 ],
-                  //               ),
-                  //               title: Column(
-                  //                 crossAxisAlignment: CrossAxisAlignment.start,
-                  //                 children: [
-                  //                   Text(
-                  //                     'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
-                  //                     style: TextStyle(
-                  //                       fontSize: 18.0,
-                  //                       fontWeight: FontWeight.w500,
-                  //                     ),
-                  //                   ),
-                  //                   Text(
-                  //                     'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
-                  //                     style: TextStyle(
-                  //                       fontSize: 16.0,
-                  //                       fontWeight: FontWeight.w400,
-                  //                     ),
-                  //                   ),
-                  //                   SizedBox(height: 10.0),
-                  //                 ],
-                  //               ),
-                  //               subtitle: Text(
-                  //                 'Data: ${agendamento.dtAgenda}',
-                  //                 style: TextStyle(
-                  //                   fontSize: 15.0,
-                  //                   fontWeight: FontWeight.w500,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // );
                 },
               ),
             )
