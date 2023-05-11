@@ -5,6 +5,7 @@ import 'package:on_health_app/models/agendamentos.dart';
 import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/utils/app_routes.dart';
+import 'package:on_health_app/utils/capitalize.dart';
 import 'package:provider/provider.dart';
 
 class HomeAdminPage extends StatefulWidget {
@@ -118,7 +119,7 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                   title: Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      agendamento.nome!,
+                                      agendamento.nome!.capitalizeByWord(),
                                       style: const TextStyle(
                                         fontSize: 17.0,
                                         fontWeight: FontWeight.bold,

@@ -31,7 +31,7 @@ class PatientInfo extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  agendamento.nome!,
+                  agendamento.nome!.capitalizeByWord(),
                   style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
