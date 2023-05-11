@@ -30,6 +30,18 @@ class AuthProvider with ChangeNotifier {
     return _cnes != null && _cnes != '';
   }
 
+  String? get token {
+    return hasToken ? _token : null;
+  }
+
+  String? get cpf {
+    return _cpf != '' ? _cpf : null;
+  }
+
+  String? get cnes {
+    return _cnes != '' ? _cnes : null;
+  }
+
   get dadosHipertensao => _dadosHipertensao;
 
   get dadosDiabetes => _dadosDiabetes;
@@ -42,7 +54,7 @@ class AuthProvider with ChangeNotifier {
     String urlFragment,
   ) async {
     final url =
-        'http://192.168.0.103:8080/onhealth/rest/consultas/$urlFragment/login';
+        'http://192.168.43.231:8080/onhealth/rest/consultas/$urlFragment/login';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -117,7 +129,7 @@ class AuthProvider with ChangeNotifier {
     _dsCBO = _userData['dsCBO'] ?? '';
 
     final url =
-        'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
+        'http://192.168.43.231:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
 
     final response = await http.get(
       Uri.parse(url),

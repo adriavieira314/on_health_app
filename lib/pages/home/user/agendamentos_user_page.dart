@@ -25,71 +25,78 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
   Widget build(BuildContext context) {
     final listaAgendamentos = Provider.of<AgendamentosProvider>(
       context,
-      listen: false,
+      listen: true,
     ).listaAgendamentosUsuario;
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(10),
-      itemCount: listaAgendamentos!.agendamentos!.length,
-      itemBuilder: (BuildContext context, int index) {
-        Lista lista = listaAgendamentos.agendamentos![index];
+    return listaAgendamentos == null
+        ? Center(
+            child: Text(
+              'Sem agendamentos',
+              style: TextStyle(fontSize: 16),
+            ),
+          )
+        : ListView.builder(
+            padding: const EdgeInsets.all(10),
+            itemCount: listaAgendamentos.agendamentos!.length,
+            itemBuilder: (BuildContext context, int index) {
+              Lista lista = listaAgendamentos.agendamentos![index];
 
-        return ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: lista.agendamentos!.length,
-          itemBuilder: (BuildContext context, int index) {
-            Agendamentos agendamento = lista.agendamentos![index];
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: lista.agendamentos!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Agendamentos agendamento = lista.agendamentos![index];
 
-            return Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      leading: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                  return Card(
+                    elevation: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.date_range),
-                        ],
-                      ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
+                          ListTile(
+                            leading: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.date_range),
+                              ],
+                            ),
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Especialidade: ${agendamento.dsCBO!.capitalizeByWord()}',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                              ],
+                            ),
+                            subtitle: Text(
+                              'Data: ${agendamento.dtAgenda}',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                          Text(
-                            'Médico: ${agendamento.nmProfSaude!.capitalizeByWord()}',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
                         ],
-                      ),
-                      subtitle: Text(
-                        'Data: ${agendamento.dtAgenda}',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
+                  );
+                },
+              );
+            },
+          );
   }
 }

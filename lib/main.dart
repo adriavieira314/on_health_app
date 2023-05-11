@@ -14,8 +14,15 @@ void main() {
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => AgendamentosProvider(),
+        ChangeNotifierProxyProvider<AuthProvider, AgendamentosProvider>(
+          create: (_) => AgendamentosProvider('', '', ''),
+          update: (ctx, auth, previousProductList) {
+            return AgendamentosProvider(
+              auth.token ?? '',
+              auth.cpf,
+              auth.cnes,
+            );
+          },
         ),
         Provider<NotificationService>(
           create: (context) => NotificationService(),
