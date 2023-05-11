@@ -18,6 +18,9 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
+  final List<bool> loadDiabetesGraph = [false, false];
+  final List<bool> loadHipertensaoGraph = [false, false];
+
   @override
   void initState() {
     super.initState();
@@ -28,19 +31,39 @@ class _GraphPageState extends State<GraphPage> {
     await Provider.of<IndicadoresProvider>(
       context,
       listen: false,
-    ).indicadorDiabetesUnidade().then((value) => print('value'));
+    ).indicadorDiabetesUnidade().then((value) {
+      print('value1');
+      setState(() {
+        loadDiabetesGraph[0] = true;
+      });
+    });
     await Provider.of<IndicadoresProvider>(
       context,
       listen: false,
-    ).indicadorDiabetesGeral().then((value) => print('value2'));
+    ).indicadorDiabetesGeral().then((value) {
+      print('value2');
+      setState(() {
+        loadDiabetesGraph[1] = true;
+      });
+    });
     await Provider.of<IndicadoresProvider>(
       context,
       listen: false,
-    ).indicadorHipertensaoUnidade().then((value) => print('value3'));
+    ).indicadorHipertensaoUnidade().then((value) {
+      print('value3');
+      setState(() {
+        loadHipertensaoGraph[0] = true;
+      });
+    });
     await Provider.of<IndicadoresProvider>(
       context,
       listen: false,
-    ).indicadorHipertensaoGeral().then((value) => print('value4'));
+    ).indicadorHipertensaoGeral().then((value) {
+      print('value4');
+      setState(() {
+        loadHipertensaoGraph[1] = true;
+      });
+    });
   }
 
   @override
@@ -131,22 +154,30 @@ class _GraphPageState extends State<GraphPage> {
                     padding: EdgeInsets.only(top: 20.0),
                     child: TabBarView(
                       children: [
-                        AppGraphDiabetes(
-                          diabetesValueGeral:
-                              providerIndicadores.indicDiabetesGeral?.indice ??
-                                  0.0,
-                          diabetesValueUnid: providerIndicadores
-                                  .indicDiabetesUnidade?.indice ??
-                              0.0,
-                        ),
-                        AppGraphHipertensao(
-                          hipertensaoValueGeral: providerIndicadores
-                                  .indicHipertensaoGeral?.indice ??
-                              0.0,
-                          hipertensaoValueUnid: providerIndicadores
-                                  .indicHipertensaoUnidade?.indice ??
-                              0.0,
-                        ),
+                        loadDiabetesGraph.every((value) => value == true)
+                            ? AppGraphDiabetes(
+                                diabetesValueGeral: providerIndicadores
+                                        .indicDiabetesGeral?.indice ??
+                                    0.0,
+                                diabetesValueUnid: providerIndicadores
+                                        .indicDiabetesUnidade?.indice ??
+                                    0.0,
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                        loadHipertensaoGraph.every((value) => value == true)
+                            ? AppGraphHipertensao(
+                                hipertensaoValueGeral: providerIndicadores
+                                        .indicHipertensaoGeral?.indice ??
+                                    0.0,
+                                hipertensaoValueUnid: providerIndicadores
+                                        .indicHipertensaoUnidade?.indice ??
+                                    0.0,
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(),
+                              ),
                       ],
                     ),
                   ),
