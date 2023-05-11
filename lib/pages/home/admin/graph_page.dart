@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/app_graph.dart';
+import 'package:on_health_app/providers/auth_provider.dart';
+import 'package:on_health_app/providers/indicadores_provider.dart';
+import 'package:provider/provider.dart';
 
 class ChartData {
   ChartData(this.x, this.y);
@@ -15,18 +18,41 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
-  final List<ChartData> chartData = [
-    ChartData('Jan', 10),
-    ChartData('Fev', 11),
-    ChartData('Mar', 9),
-    ChartData('Abr', 10),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    callIndicadores();
+  }
+
+  callIndicadores() async {
+    await Provider.of<IndicadoresProvider>(
+      context,
+      listen: false,
+    ).indicadorDiabetesUnidade().then((value) => print('value'));
+    await Provider.of<IndicadoresProvider>(
+      context,
+      listen: false,
+    ).indicadorDiabetesGeral().then((value) => print('value2'));
+    await Provider.of<IndicadoresProvider>(
+      context,
+      listen: false,
+    ).indicadorHipertensaoUnidade().then((value) => print('value3'));
+    await Provider.of<IndicadoresProvider>(
+      context,
+      listen: false,
+    ).indicadorHipertensaoGeral().then((value) => print('value4'));
+  }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AuthProvider>(context);
+    final userInfo = provider.userData;
+    final providerIndicadores =
+        Provider.of<IndicadoresProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nome da Unidade'),
+        title: Text(userInfo['unidadeSaude']),
         centerTitle: true,
         toolbarHeight: 80,
         shape: const RoundedRectangleBorder(
@@ -43,7 +69,7 @@ class _GraphPageState extends State<GraphPage> {
             child: Text(
               'Análise de Dados',
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -94,19 +120,33 @@ class _GraphPageState extends State<GraphPage> {
                   ),
                 ),
                 Container(
-                  height: 400, //height of TabBarView
+                  height: 680, //height of TabBarView
                   decoration: const BoxDecoration(
                     // color: Colors.red,
                     border: Border(
                       top: BorderSide(color: Colors.grey, width: 0.5),
                     ),
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: TabBarView(
                       children: [
-                        AppGraph(graphValue: 60.0),
-                        AppGraph(graphValue: 40.0),
+                        AppGraphDiabetes(
+                          diabetesValueGeral:
+                              providerIndicadores.indicDiabetesGeral?.indice ??
+                                  0.0,
+                          diabetesValueUnid: providerIndicadores
+                                  .indicDiabetesUnidade?.indice ??
+                              0.0,
+                        ),
+                        AppGraphHipertensao(
+                          hipertensaoValueGeral: providerIndicadores
+                                  .indicHipertensaoGeral?.indice ??
+                              0.0,
+                          hipertensaoValueUnid: providerIndicadores
+                                  .indicHipertensaoUnidade?.indice ??
+                              0.0,
+                        ),
                       ],
                     ),
                   ),

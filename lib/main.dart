@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
+import 'package:on_health_app/providers/indicadores_provider.dart';
 import 'package:on_health_app/services/notification_service.dart';
 import 'package:on_health_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,14 @@ void main() {
               auth.token ?? '',
               auth.cpf,
               auth.cnes,
+            );
+          },
+        ),
+        ChangeNotifierProxyProvider<AuthProvider, IndicadoresProvider>(
+          create: (_) => IndicadoresProvider(''),
+          update: (ctx, auth, previousProductList) {
+            return IndicadoresProvider(
+              auth.token ?? '',
             );
           },
         ),
