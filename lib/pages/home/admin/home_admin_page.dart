@@ -152,8 +152,10 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                   trailing: TextButton(
                                     child: const Text('Ver mais'),
                                     onPressed: () {
-                                      Navigator.of(context)
-                                          .pushNamed(AppRoutes.PATIENT_INFO);
+                                      Navigator.of(context).pushNamed(
+                                        AppRoutes.PATIENT_INFO,
+                                        arguments: agendamento ?? {},
+                                      );
                                     },
                                   ),
                                 ),
