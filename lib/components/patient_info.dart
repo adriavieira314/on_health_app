@@ -61,7 +61,7 @@ class PatientInfo extends StatelessWidget {
             ),
             const Divider(),
             TextInfo(
-              label: 'Unidade de Saúde da consulta: ',
+              label: 'Unidade de Saúde: ',
               info: agendamento.unidadeSaude,
             ),
             const Divider(),
