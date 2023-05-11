@@ -17,6 +17,7 @@ class HomeAdminPage extends StatefulWidget {
 
 class _HomeAdminPageState extends State<HomeAdminPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool loading = true;
 
   @override
   void initState() {
@@ -24,7 +25,11 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
     Provider.of<AgendamentosProvider>(
       context,
       listen: false,
-    ).loadAgendamentosGestor();
+    ).loadAgendamentosGestor().then((value) {
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -75,112 +80,118 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
               ),
             ),
             Expanded(
-              child: listaAgendamentos == null
+              child: loading
                   ? Center(
-                      child: Text(
-                        'Sem agendamentos',
-                        style: TextStyle(fontSize: 16),
-                      ),
+                      child: CircularProgressIndicator(),
                     )
-                  : ListView.builder(
-                      itemCount: listaAgendamentos.agendamentos!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Lista lista = listaAgendamentos.agendamentos![index];
+                  : listaAgendamentos == null
+                      ? Center(
+                          child: Text(
+                            'Sem agendamentos',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: listaAgendamentos.agendamentos!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Lista lista =
+                                listaAgendamentos.agendamentos![index];
 
-                        return Column(
-                          children: [
-                            ListTile(
-                              tileColor: Colors.grey.shade200,
-                              title: Row(
-                                children: [
-                                  Text(
-                                    'Pacientes do dia: ',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(lista.dtAgenda!),
-                                ],
-                              ),
-                            ),
-                            ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: lista.agendamentos!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                Agendamentos agendamento =
-                                    lista.agendamentos![index];
-
-                                return Card(
-                                  elevation: 0,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
+                            return Column(
+                              children: [
+                                ListTile(
+                                  tileColor: Colors.grey.shade200,
+                                  title: Row(
                                     children: [
-                                      ListTile(
-                                        leading: CircleAvatar(
-                                          backgroundColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          radius: 20,
-                                          child: const Icon(Icons.person),
-                                        ),
-                                        title: Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 8.0),
-                                          child: Text(
-                                            agendamento.nome!
-                                                .capitalizeByWord(),
-                                            style: const TextStyle(
-                                              fontSize: 17.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        subtitle: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'IMC: ${agendamento.imc}',
-                                              style: const TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            // ! confirmação de agendamento
-                                            Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.red,
-                                              ),
-                                              height: 10,
-                                              width: 50,
-                                            )
-                                          ],
-                                        ),
-                                        trailing: TextButton(
-                                          child: const Text('Ver mais'),
-                                          onPressed: () {
-                                            Navigator.of(context).pushNamed(
-                                              AppRoutes.PATIENT_INFO,
-                                              arguments: agendamento ?? {},
-                                            );
-                                          },
+                                      Text(
+                                        'Pacientes do dia: ',
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
+                                      Text(lista.dtAgenda!),
                                     ],
                                   ),
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                                ),
+                                ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: lista.agendamentos!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    Agendamentos agendamento =
+                                        lista.agendamentos![index];
+
+                                    return Card(
+                                      elevation: 0,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              radius: 20,
+                                              child: const Icon(Icons.person),
+                                            ),
+                                            title: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Text(
+                                                agendamento.nome!
+                                                    .capitalizeByWord(),
+                                                style: const TextStyle(
+                                                  fontSize: 17.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            subtitle: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'IMC: ${agendamento.imc}',
+                                                  style: const TextStyle(
+                                                    fontSize: 15.0,
+                                                  ),
+                                                ),
+                                                // ! confirmação de agendamento
+                                                Container(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(vertical: 8.0),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: Colors.red,
+                                                  ),
+                                                  height: 10,
+                                                  width: 50,
+                                                )
+                                              ],
+                                            ),
+                                            trailing: TextButton(
+                                              child: const Text('Ver mais'),
+                                              onPressed: () {
+                                                Navigator.of(context).pushNamed(
+                                                  AppRoutes.PATIENT_INFO,
+                                                  arguments: agendamento ?? {},
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
             )
           ],
         ),
