@@ -52,6 +52,16 @@ class _GraphState extends State<Graph> with SingleTickerProviderStateMixin {
       new TabController(vsync: this, length: myTabs.length);
 
   @override
+  void initState() {
+    super.initState();
+    _tabController.animation!.addListener(_tabListener);
+  }
+
+  void _tabListener() {
+    setState(() {});
+  }
+
+  @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
