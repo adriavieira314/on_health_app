@@ -13,23 +13,6 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Bem Vindo(a)'),
             automaticallyImplyLeading: false,
           ),
-          const Divider(),
-          const ListTile(
-            leading: Icon(Icons.person, size: 30.0),
-            title: Text(
-              'Perfil',
-              style: TextStyle(fontSize: 18.0),
-            ),
-          ),
-          const Divider(),
-          const ListTile(
-            leading: Icon(Icons.settings, size: 30.0),
-            title: Text(
-              'Conta',
-              style: TextStyle(fontSize: 18.0),
-            ),
-          ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.logout, size: 30.0),
             title: const Text(
