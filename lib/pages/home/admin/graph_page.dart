@@ -17,14 +17,61 @@ class GraphPage extends StatefulWidget {
   State<GraphPage> createState() => _GraphPageState();
 }
 
-class _GraphPageState extends State<GraphPage> {
+class _GraphPageState extends State<GraphPage>
+    with SingleTickerProviderStateMixin {
   final List<bool> loadDiabetesGraph = [false, false];
   final List<bool> loadHipertensaoGraph = [false, false];
+  final List<Tab> myTabs = <Tab>[
+    new Tab(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.bloodtype_outlined),
+          ),
+          Text(
+            'Diabetes',
+            style: TextStyle(fontSize: 22.0),
+          ),
+        ],
+      ),
+    ),
+    new Tab(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.monitor_heart_outlined),
+          ),
+          Text(
+            'Hipertensão',
+            style: TextStyle(fontSize: 22.0),
+          ),
+        ],
+      ),
+    ),
+  ];
+
+  late TabController _tabController =
+      new TabController(vsync: this, length: myTabs.length);
 
   @override
   void initState() {
     super.initState();
     callIndicadores();
+    _tabController.animation!.addListener(_tabListener);
+  }
+
+  void _tabListener() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   callIndicadores() async {
@@ -85,107 +132,94 @@ class _GraphPageState extends State<GraphPage> {
         ),
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 18.0),
-            child: Text(
-              'Análise de Dados',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DefaultTabController(
+              length: 2,
+              initialIndex: 0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: Image.asset(
+                      'assets/images/previne-brasil.jpeg',
+                      width: 40,
+                      height: 40,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 18.0),
+                    child: Center(
+                      child: Text(
+                        _tabController.index == 0
+                            ? 'Percentual de diabéticos com solicitação de hemoglobina glicada'
+                            : 'Percentual de pessoas hipertensas com Pressão Arterial aferida em cada semestre',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.blue.shade50,
+                    child: TabBar(
+                      labelColor: Colors.green,
+                      unselectedLabelColor: Colors.black,
+                      controller: _tabController,
+                      tabs: myTabs,
+                      onTap: (value) => setState(() {}),
+                    ),
+                  ),
+                  Container(
+                    height: 680, //height of TabBarView
+                    decoration: const BoxDecoration(
+                      // color: Colors.red,
+                      border: Border(
+                        top: BorderSide(color: Colors.grey, width: 0.5),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: [
+                          loadDiabetesGraph.every((value) => value == true)
+                              ? AppGraphDiabetes(
+                                  diabetesValueGeral: providerIndicadores
+                                          .indicDiabetesGeral?.indice ??
+                                      0.0,
+                                  diabetesValueUnid: providerIndicadores
+                                          .indicDiabetesUnidade?.indice ??
+                                      0.0,
+                                )
+                              : Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                          loadHipertensaoGraph.every((value) => value == true)
+                              ? AppGraphHipertensao(
+                                  hipertensaoValueGeral: providerIndicadores
+                                          .indicHipertensaoGeral?.indice ??
+                                      0.0,
+                                  hipertensaoValueUnid: providerIndicadores
+                                          .indicHipertensaoUnidade?.indice ??
+                                      0.0,
+                                )
+                              : Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ),
-          DefaultTabController(
-            length: 2,
-            initialIndex: 0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  color: Colors.blue.shade50,
-                  child: const TabBar(
-                    labelColor: Colors.green,
-                    unselectedLabelColor: Colors.black,
-                    tabs: [
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.bloodtype_outlined),
-                            ),
-                            Text(
-                              'Diabetes',
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Tab(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 8.0),
-                              child: Icon(Icons.monitor_heart_outlined),
-                            ),
-                            Text(
-                              'Hipertensão',
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 680, //height of TabBarView
-                  decoration: const BoxDecoration(
-                    // color: Colors.red,
-                    border: Border(
-                      top: BorderSide(color: Colors.grey, width: 0.5),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: TabBarView(
-                      children: [
-                        loadDiabetesGraph.every((value) => value == true)
-                            ? AppGraphDiabetes(
-                                diabetesValueGeral: providerIndicadores
-                                        .indicDiabetesGeral?.indice ??
-                                    0.0,
-                                diabetesValueUnid: providerIndicadores
-                                        .indicDiabetesUnidade?.indice ??
-                                    0.0,
-                              )
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                        loadHipertensaoGraph.every((value) => value == true)
-                            ? AppGraphHipertensao(
-                                hipertensaoValueGeral: providerIndicadores
-                                        .indicHipertensaoGeral?.indice ??
-                                    0.0,
-                                hipertensaoValueUnid: providerIndicadores
-                                        .indicHipertensaoUnidade?.indice ??
-                                    0.0,
-                              )
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
