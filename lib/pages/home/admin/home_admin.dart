@@ -29,24 +29,15 @@ class _HomeAdminState extends State<HomeAdmin> {
       date: "15/03/2023",
       patients: [
         Patient(age: 25, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 30, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
+        Patient(age: 30, name: 'Andre Torres', imc: 29.0, confirmation: 1),
       ],
     ),
     ListOfPatients(
       date: "16/03/2023",
       patients: [
-        Patient(age: 59, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 2),
-        Patient(age: 20, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 60, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-      ],
-    ),
-    ListOfPatients(
-      date: "17/03/2023",
-      patients: [
-        Patient(age: 18, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 0),
-        Patient(age: 5, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
-        Patient(age: 2, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 2),
-        Patient(age: 5, name: 'Adria Vieira Lima', imc: 29.0, confirmation: 1),
+        Patient(age: 59, name: 'Carolina Silva', imc: 29.0, confirmation: 2),
+        Patient(age: 20, name: 'Matheus Carvalho', imc: 29.0, confirmation: 0),
+        Patient(age: 60, name: 'Camila Lima', imc: 29.0, confirmation: 1),
       ],
     ),
   ];
@@ -66,16 +57,14 @@ class _HomeAdminState extends State<HomeAdmin> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    title: const Text(
-                      'Nome da Unidade',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                    title: Center(
+                      child: const Text(
+                        'UBS Joao Pereira de Oliveira',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    trailing: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Alterar'),
                     ),
                   ),
                 ],

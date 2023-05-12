@@ -1,11 +1,14 @@
 final userInfo = {
   "nome": "José Maria de Souza",
-  "cpf": "000.000.000-00",
+  "cpf": "123.456.789-00",
   "birthdate": "12/01/1956",
-  "imc": "(sendentarismo/odesidade) CID/CIAP",
+  "imc": "17.60",
+  "classImc": "Abaixo do Peso",
   "parent": "Maria de Cassia Rodrigues",
   "street": "Rua Antonio Batista da Silva, 440",
   "address": "Centro - João Pessoa/PB",
+  "unidadeSaude": "UBS Joao Pereira de Oliveira",
+  "doctor": "Daniel Almeida",
   "lastAppointment": {
     "ubs": "UBS Fulano Cicrano",
     "date": "30/04/2023",
@@ -19,5 +22,7 @@ final userInfo = {
     "speciality": "Cardiologista",
   },
   "glicemia": '100 mg/dl',
-  "medication": 'Teste teste',
+  "medication": '',
+  "dtAgenda": "25/05/2023",
+  "hrAgenda": "08:00",
 };

@@ -149,8 +149,8 @@ class HomeUser extends StatelessWidget {
                               ),
                               const Divider(),
                               TextInfo(
-                                label: 'Valor da glicemia: ',
-                                info: info['glicemia']!,
+                                label: 'Pressão: ',
+                                info: '12.0',
                               ),
                               const Divider(),
                               TextInfo(
