@@ -17,6 +17,8 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
   final _passwordFocus = FocusNode();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _isObscure = true;
+
   final Map<String?, dynamic> _formData = {
     'cpf': '',
     'password': '',
@@ -143,10 +145,20 @@ class _LoginAdminPageState extends State<LoginAdminPage> {
                   ),
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Digite a sua senha',
                     border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                   ),
+                  obscureText: _isObscure,
                   inputFormatters: [LengthLimitingTextInputFormatter(8)],
                   textInputAction: TextInputAction.done,
                   focusNode: _passwordFocus,
