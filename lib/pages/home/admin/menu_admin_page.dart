@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/data/dumb_data.dart';
 import 'package:on_health_app/pages/home/admin/graph_page.dart';
 import 'package:on_health_app/pages/home/admin/home_admin_page.dart';
 
@@ -16,8 +15,6 @@ class _MenuAdminPageState extends State<MenuAdminPage> {
     HomeAdminPage(),
     GraphPage(),
   ];
-
-  final Map<String, dynamic> info = userInfo;
 
   void _onItemTapped(int index) {
     setState(() {
