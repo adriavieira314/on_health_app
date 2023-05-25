@@ -221,7 +221,7 @@ class _MenuUserPageState extends State<MenuUserPage> {
           id: 1,
           title: 'Você tem uma consulta.',
           body: 'Não esqueça sua consulta no dia $date',
-          payload: AppRoutes.PATIENT_INFO,
+          payload: AppRoutes.AUTH_OR_HOME,
         ),
       );
     } else if (difference.inHours >= 44 && difference.inHours <= 48) {
@@ -230,7 +230,7 @@ class _MenuUserPageState extends State<MenuUserPage> {
           id: 2,
           title: 'Você tem uma consulta.',
           body: 'Não esqueça sua consulta no dia $date',
-          payload: AppRoutes.PATIENT_INFO,
+          payload: AppRoutes.AUTH_OR_HOME,
         ),
       );
     }
