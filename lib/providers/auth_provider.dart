@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:on_health_app/data/store.dart';
 import 'package:on_health_app/exceptions/http_exception.dart';
+import 'package:on_health_app/utils/constants.dart';
 
 class AuthProvider with ChangeNotifier {
   String? _token;
@@ -53,8 +54,7 @@ class AuthProvider with ChangeNotifier {
     String password,
     String urlFragment,
   ) async {
-    final url =
-        'http://192.168.0.103:8080/onhealth/rest/consultas/$urlFragment/login';
+    final url = '$serverURL/onhealth/rest/consultas/$urlFragment/login';
     final response = await http.post(
       Uri.parse(url),
       body: jsonEncode({
@@ -129,7 +129,7 @@ class AuthProvider with ChangeNotifier {
     _dsCBO = _userData['dsCBO'] ?? '';
 
     final url =
-        'http://192.168.0.103:8080/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
+        '$serverURL/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
 
     final response = await http.get(
       Uri.parse(url),

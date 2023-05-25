@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:on_health_app/exceptions/http_exception.dart';
 import 'package:on_health_app/models/indicador.dart';
+import 'package:on_health_app/utils/constants.dart';
 
 class IndicadoresProvider with ChangeNotifier {
   String? _token;
@@ -22,7 +23,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesUnidade() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",
@@ -47,7 +48,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesGeral() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}',
       ),
       headers: {
         "Accept": "application/json",
@@ -69,7 +70,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoUnidade() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",
@@ -91,7 +92,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoGeral() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.0.103:8080/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}',
       ),
       headers: {
         "Accept": "application/json",

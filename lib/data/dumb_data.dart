@@ -1,23 +1,58 @@
-final userInfo = {
-  "nome": "José Maria de Souza",
-  "cpf": "000.000.000-00",
-  "birthdate": "12/01/1956",
-  "imc": "(sendentarismo/odesidade) CID/CIAP",
-  "parent": "Maria de Cassia Rodrigues",
-  "street": "Rua Antonio Batista da Silva, 440",
-  "address": "Centro - João Pessoa/PB",
-  "lastAppointment": {
-    "ubs": "UBS Fulano Cicrano",
-    "date": "30/04/2023",
-    "doctor": "Daniel Almeida",
-    "speciality": "Clínico Geral",
-  },
-  "nextAppointment": {
-    "ubs": "UBS Fulano Cicrano",
-    "date": "05/05/2023",
-    "doctor": "Thais Silva",
-    "speciality": "Cardiologista",
-  },
-  "glicemia": '100 mg/dl',
-  "medication": 'Teste teste',
+final agenda = {
+  "agendamentos": [
+    {
+      "dtAgenda": "21/05/2023",
+      "agendamentos": [
+        {
+          "nome": "CLECIDIS CRUZ DEODATO",
+          "cpf": "16080904268",
+          "imc": 17.60,
+          "classImc": "Abaixo do Peso",
+          "dtAgenda": "21/05/2023",
+          "hrAgenda": "08:00",
+          "unidadeSaude": "UBS Mae Laurinda",
+          "dsCBO": "ENFERMEIRO DA ESTRATÉGIA DE SAÚDE DA FAMÍLIA",
+          "nmProfSaude": "IVONETE GUEDES DE SOUZA"
+        },
+        {
+          "nome": "CLECIDIS CRUZ DEODATO",
+          "cpf": "16080904268",
+          "imc": 17.60,
+          "classImc": "Abaixo do Peso",
+          "dtAgenda": "21/05/2023",
+          "hrAgenda": "08:00",
+          "unidadeSaude": "UBS Mae Laurinda",
+          "dsCBO": "ENFERMEIRO DA ESTRATÉGIA DE SAÚDE DA FAMÍLIA",
+          "nmProfSaude": "IVONETE GUEDES DE SOUZA"
+        },
+        {
+          "nome": "CLECIDIS CRUZ DEODATO",
+          "cpf": "16080904268",
+          "imc": 17.60,
+          "classImc": "Abaixo do Peso",
+          "dtAgenda": "21/05/2023",
+          "hrAgenda": "08:00",
+          "unidadeSaude": "UBS Mae Laurinda",
+          "dsCBO": "ENFERMEIRO DA ESTRATÉGIA DE SAÚDE DA FAMÍLIA",
+          "nmProfSaude": "IVONETE GUEDES DE SOUZA"
+        },
+      ]
+    },
+    {
+      "dtAgenda": "18/05/2023",
+      "agendamentos": [
+        {
+          "nome": "CLECIDIS CRUZ DEODATO",
+          "cpf": "16080904268",
+          "imc": 17.60,
+          "classImc": "Abaixo do Peso",
+          "dtAgenda": "18/05/2023",
+          "hrAgenda": "23:50",
+          "unidadeSaude": "UBS Mae Laurinda",
+          "dsCBO": "DERMATOLOGIA",
+          "nmProfSaude": "CAROLINA CHIRANO"
+        }
+      ]
+    },
+  ]
 };

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/main.dart';
 import 'package:on_health_app/pages/login/login_admin_page.dart';
 import 'package:on_health_app/pages/login/login_user_page.dart';
+import 'package:on_health_app/utils/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,6 +27,41 @@ class _LoginPageState extends State<LoginPage> {
     double safeAreaHeight = mediaQuery.padding.top;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actionsIconTheme:
+            IconThemeData(color: Theme.of(context).colorScheme.primary),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0, left: 15.0),
+            child: PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text("Configuração"),
+                  value: 1,
+                  onTap: () => {
+                    Future.delayed(
+                      const Duration(seconds: 0),
+                      () => showDialog(
+                        context: context,
+                        builder: (context) => const AlertDialog(
+                          title: Text(
+                            'Configurar Servidor',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Configuracao(),
+                        ),
+                      ),
+                    )
+                  },
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
@@ -103,6 +141,94 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Configuracao extends StatelessWidget {
+  const Configuracao({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    final TextEditingController serverController = TextEditingController();
+    final TextEditingController portController = TextEditingController();
+
+    prefs.getString('server') != null
+        ? serverController.text = prefs.getString('server')!
+        : serverController.text = "";
+
+    prefs.getString('port') != null
+        ? portController.text = prefs.getString('port')!
+        : portController.text = "";
+
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: 250.0,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextFormField(
+                autofocus: true,
+                decoration: const InputDecoration(
+                  labelText: 'Servidor',
+                ),
+                controller: serverController,
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o servidor';
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: TextFormField(
+                  onTap: () {},
+                  decoration: const InputDecoration(
+                    labelText: 'Porta',
+                  ),
+                  controller: portController,
+                  keyboardType: TextInputType.number,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira a porta';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final _prefs = await SharedPreferences.getInstance();
+                      _prefs.setString('server', serverController.text);
+                      _prefs.setString('port', portController.text);
+                      getServer();
+                      Navigator.pop(context);
+                      RestartWidget.restartApp(context);
+                    }
+                  },
+                  child: const Text(
+                    'Finalizar',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 25.0),
+                    elevation: 5,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
