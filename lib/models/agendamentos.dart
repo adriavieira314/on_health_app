@@ -48,6 +48,7 @@ class Lista {
 }
 
 class Agendamentos {
+  int? id;
   String? nome;
   String? cpf;
   double? imc;
@@ -57,8 +58,10 @@ class Agendamentos {
   String? unidadeSaude;
   String? dsCBO;
   String? nmProfSaude;
+  bool? pushSent;
 
   Agendamentos({
+    this.id,
     this.nome,
     this.cpf,
     this.imc,
@@ -68,9 +71,11 @@ class Agendamentos {
     this.unidadeSaude,
     this.dsCBO,
     this.nmProfSaude,
+    this.pushSent,
   });
 
   Agendamentos.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     nome = json['nome'];
     cpf = json['cpf'];
     imc = json['imc'];
@@ -80,10 +85,12 @@ class Agendamentos {
     unidadeSaude = json['unidadeSaude'];
     dsCBO = json['dsCBO'];
     nmProfSaude = json['nmProfSaude'];
+    pushSent = json['pushSent'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['nome'] = this.nome;
     data['cpf'] = this.cpf;
     data['imc'] = this.imc;
@@ -93,6 +100,7 @@ class Agendamentos {
     data['unidadeSaude'] = this.unidadeSaude;
     data['dsCBO'] = this.dsCBO;
     data['nmProfSaude'] = this.nmProfSaude;
+    data['pushSent'] = this.pushSent;
     return data;
   }
 }
