@@ -57,6 +57,26 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   },
                 ),
+                PopupMenuItem(
+                  child: const Text("Tempo"),
+                  value: 3,
+                  onTap: () => {
+                    Future.delayed(
+                      const Duration(seconds: 0),
+                      () => showDialog(
+                        context: context,
+                        builder: (context) => const AlertDialog(
+                          title: Text(
+                            'Tempo',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: TempoAgenda(),
+                        ),
+                      ),
+                    )
+                  },
+                ),
               ],
             ),
           )
@@ -212,6 +232,74 @@ class Configuracao extends StatelessWidget {
                       _prefs.setString('server', serverController.text);
                       _prefs.setString('port', portController.text);
                       getServer();
+                      Navigator.pop(context);
+                      RestartWidget.restartApp(context);
+                    }
+                  },
+                  child: const Text(
+                    'Finalizar',
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 25.0),
+                    elevation: 5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TempoAgenda extends StatelessWidget {
+  const TempoAgenda({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    final TextEditingController tempoChaveamentoController =
+        TextEditingController();
+
+    prefs.getString('tempoChaveamento') != null
+        ? tempoChaveamentoController.text = prefs.getString('tempoChaveamento')!
+        : tempoChaveamentoController.text = "";
+
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: 250.0,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextFormField(
+                autofocus: true,
+                decoration: const InputDecoration(
+                  labelText: 'Tempo (em minutos)',
+                ),
+                controller: tempoChaveamentoController,
+                keyboardType: TextInputType.number,
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o tempo';
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final _prefs = await SharedPreferences.getInstance();
+                      _prefs.setString(
+                          'tempoChaveamento', tempoChaveamentoController.text);
+                      getTempoBuscaAgenda();
                       Navigator.pop(context);
                       RestartWidget.restartApp(context);
                     }

@@ -15,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
   getServer();
+  getTempoBuscaAgenda();
 
   // configuração para manter dispositivo em landscape
   SystemChrome.setPreferredOrientations([

@@ -10,6 +10,7 @@ import 'package:on_health_app/pages/home/user/home_user_page.dart';
 import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:on_health_app/services/notification_service.dart';
 import 'package:on_health_app/utils/app_routes.dart';
+import 'package:on_health_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,8 +38,20 @@ class _MenuUserPageState extends State<MenuUserPage> {
 
   @override
   void initState() {
+    print('tempoBuscaAgenda');
+    print(tempoBuscaAgenda);
     super.initState();
-    Timer.periodic(Duration(minutes: 1), (Timer t) => callAgendaEndpoint());
+    if (mounted) {
+      Timer.periodic(
+        Duration(minutes: tempoBuscaAgenda),
+        (Timer t) => callAgendaEndpoint(),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -74,7 +87,7 @@ class _MenuUserPageState extends State<MenuUserPage> {
   }
 
   callAgendaEndpoint() async {
-    print('hola, estoy aqui');
+    print('callAgendaEndpoint');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     // await prefs.remove('agendamentos');
@@ -90,22 +103,23 @@ class _MenuUserPageState extends State<MenuUserPage> {
       final String? agendamentos = await prefs.getString('agendamentos');
 
       if (agendamentos == null) {
-        print('opa');
         final arrayAgendamento = [];
+
         for (var i = 0; i < response!.agendamentos!.length; i++) {
           final agendamentoGeral = response.agendamentos![i];
 
           for (var j = 0; j < agendamentoGeral.agendamentos!.length; j++) {
             final agendamento = agendamentoGeral.agendamentos![j];
-            agendamento.pushSent = false;
 
-            arrayAgendamento.add(agendamentoGeral.toJson());
+            agendamento.pushSent = false;
           }
+
+          arrayAgendamento.add(agendamentoGeral.toJson());
         }
+
         await prefs.setString('agendamentos', jsonEncode(arrayAgendamento));
         // final getAgenda = jsonDecode(getString!);
         getDate(arrayAgendamento);
-        print(arrayAgendamento);
       } else {
         final novoArrayAgendamentos = [];
 
@@ -191,7 +205,7 @@ class _MenuUserPageState extends State<MenuUserPage> {
 
         //! se tiver mais de um como false, envio a notificação
         if (count > 0) {
-          convert(element['dtAgenda'], '21:00');
+          convert(element['dtAgenda'], '20:00');
         }
       }
     }
