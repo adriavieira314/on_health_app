@@ -42,7 +42,7 @@ class _MenuUserPageState extends State<MenuUserPage> {
     print(tempoBuscaAgenda);
     super.initState();
     if (mounted) {
-      Timer.periodic(
+      cancelTimer = Timer.periodic(
         Duration(minutes: tempoBuscaAgenda),
         (Timer t) => callAgendaEndpoint(),
       );

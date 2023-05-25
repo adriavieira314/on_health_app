@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String serverURL = "";
 int tempoBuscaAgenda = 5;
+dynamic cancelTimer;
 
 void getServer() async {
   final prefs = await SharedPreferences.getInstance();

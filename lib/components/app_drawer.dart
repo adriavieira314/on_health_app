@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/utils/app_routes.dart';
+import 'package:on_health_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -40,6 +41,7 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () {
               Provider.of<AuthProvider>(context, listen: false).logout();
+              cancelTimer.cancel();
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.AUTH_OR_HOME,
               );
