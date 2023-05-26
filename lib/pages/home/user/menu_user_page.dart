@@ -109,11 +109,14 @@ class _MenuUserPageState extends State<MenuUserPage> {
     Provider.of<AgendamentosProvider>(
       context,
       listen: false,
-    ).loadFake().then((value) async {
+    ).loadAgendamentosUsuario().then((value) async {
       final response = await Provider.of<AgendamentosProvider>(
         context,
         listen: false,
-      ).listaFake;
+      ).listaAgendamentosUsuario;
+
+      print(response!.toJson());
+      if (response == null) return;
 
       final String? agendamentos = await prefs.getString('agendamentos');
 
