@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () {
               Provider.of<AuthProvider>(context, listen: false).logout();
-              cancelTimer.cancel();
+              cancelTimer != null ? cancelTimer.cancel() : '';
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.AUTH_OR_HOME,
               );

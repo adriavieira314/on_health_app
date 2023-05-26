@@ -50,11 +50,6 @@ class _MenuUserPageState extends State<MenuUserPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
@@ -89,8 +84,28 @@ class _MenuUserPageState extends State<MenuUserPage> {
   callAgendaEndpoint() async {
     print('callAgendaEndpoint');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int? yearStarted = await prefs.getInt('yearStarted');
+    final int? monthStarted = await prefs.getInt('monthStarted');
+    final int? dayStarted = await prefs.getInt('dayStarted');
 
-    // await prefs.remove('agendamentos');
+    //! depois de 5 dias, apago o que tiver no storage de agendamentos
+    if (yearStarted == null) {
+      prefs.setInt('yearStarted', DateTime.now().year);
+      prefs.setInt('monthStarted', DateTime.now().month);
+      prefs.setInt('dayStarted', DateTime.now().day);
+    } else {
+      final dayItBegan = DateTime(yearStarted, monthStarted!, dayStarted!);
+      final today = DateTime.now();
+      final differenceInDays = daysBetween(dayItBegan, today);
+
+      if (differenceInDays == 5) {
+        await prefs.remove('agendamentos');
+        await prefs.remove('yearStarted');
+        await prefs.remove('monthStarted');
+        await prefs.remove('dayStarted');
+      }
+    }
+
     Provider.of<AgendamentosProvider>(
       context,
       listen: false,
@@ -248,5 +263,11 @@ class _MenuUserPageState extends State<MenuUserPage> {
         ),
       );
     }
+  }
+
+  daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 }
