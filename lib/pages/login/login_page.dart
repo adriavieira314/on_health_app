@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     double safeAreaHeight = mediaQuery.padding.top;
+    double appHeight = AppBar().preferredSize.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: SizedBox(
-            height: mediaQuery.size.height - safeAreaHeight,
+            height: mediaQuery.size.height - safeAreaHeight - appHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
