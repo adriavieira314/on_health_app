@@ -138,6 +138,15 @@ class AuthProvider with ChangeNotifier {
         "Content-Type": "application/json",
         "Authorization": "Bearer $_token"
       },
+    ).timeout(
+      Duration(seconds: 60),
+      onTimeout: () {
+        print('hello');
+        return http.Response(
+          'Tempo de espera de resposta da URL excedeu',
+          408,
+        ); // Request Timeout response status code
+      },
     );
 
     if (response.statusCode == 401 || response.statusCode != 200) {

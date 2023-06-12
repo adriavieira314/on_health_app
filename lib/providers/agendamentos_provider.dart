@@ -40,7 +40,8 @@ class AgendamentosProvider with ChangeNotifier {
   Future<void> loadAgendamentosGestor() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=$_cnes',
+        // '$serverURL/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=$_cnes',
+        '$serverURL/onhealth/rest/consultas/gestor/proximosatendimentos?cnes=2708868',
       ),
       headers: {
         "Accept": "application/json",

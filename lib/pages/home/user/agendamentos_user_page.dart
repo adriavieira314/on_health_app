@@ -100,6 +100,33 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () => {},
+                                      style: ElevatedButton.styleFrom(
+                                        shape: const StadiumBorder(),
+                                        minimumSize: const Size(100, 40),
+                                      ),
+                                      child: const Text('Confirmar'),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    ElevatedButton(
+                                      onPressed: () => {},
+                                      style: ElevatedButton.styleFrom(
+                                        shape: const StadiumBorder(),
+                                        minimumSize: const Size(100, 40),
+                                        backgroundColor:
+                                            Theme.of(context).colorScheme.error,
+                                      ),
+                                      child: const Text('Cancelar'),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),

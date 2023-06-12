@@ -175,59 +175,35 @@ class _LoginUsuarioPageState extends State<LoginUsuarioPage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(
-                      (mediaQuery.size.width * 0.5) - 23,
-                      45,
-                    ),
-                    backgroundColor: Colors.white,
-                    elevation: 8,
-                    shadowColor: Colors.grey,
-                  ),
-                  onPressed: () => {},
-                  child: Text(
-                    'Cadastrar',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 18.0,
-                    ),
+          if (_isLoading)
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: SizedBox(
+                width: mediaQuery.size.width,
+                height: 45,
+                child: Center(
+                  child: const CircularProgressIndicator(),
+                ),
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(mediaQuery.size.width, 45),
+                  elevation: 8,
+                  shadowColor: Colors.grey,
+                ),
+                onPressed: _submitForm,
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(
+                    fontSize: 18.0,
                   ),
                 ),
-                const SizedBox(width: 10.0),
-                if (_isLoading)
-                  SizedBox(
-                    width: (mediaQuery.size.width * 0.5) - 23,
-                    height: 45,
-                    child: Center(
-                      child: const CircularProgressIndicator(),
-                    ),
-                  )
-                else
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                        (mediaQuery.size.width * 0.5) - 23,
-                        45,
-                      ),
-                      elevation: 8,
-                      shadowColor: Colors.grey,
-                    ),
-                    onPressed: _submitForm,
-                    child: const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          )
+              ),
+            )
         ],
       ),
     );

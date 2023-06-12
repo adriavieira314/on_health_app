@@ -127,17 +127,17 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                    if (!_isAdmin)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text(
-                          'Esqueci a senha',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
+                    // if (!_isAdmin)
+                    //   Padding(
+                    //     padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    //     child: Text(
+                    //       'Esqueci a senha',
+                    //       style: TextStyle(
+                    //         color: Theme.of(context).colorScheme.primary,
+                    //         fontSize: 18.0,
+                    //       ),
+                    //     ),
+                    //   ),
                     if (_isAdmin)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30.0),
