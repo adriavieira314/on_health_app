@@ -60,6 +60,7 @@ class AuthProvider with ChangeNotifier {
       body: jsonEncode({
         'cpf': cpf,
         'dtNasc': password,
+        'idIBGE': idIBGE,
       }),
       headers: {
         "Accept": "application/json",
@@ -129,7 +130,7 @@ class AuthProvider with ChangeNotifier {
     _dsCBO = _userData['dsCBO'] ?? '';
 
     final url =
-        '$serverURL/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf';
+        '$serverURL/onhealth/rest/consultas/cidadao/ultimosatendimentos?cpf=$_cpf&idIBGE=$idIBGE';
 
     final response = await http.get(
       Uri.parse(url),
@@ -143,7 +144,7 @@ class AuthProvider with ChangeNotifier {
       onTimeout: () {
         print('hello');
         return http.Response(
-          'Tempo de espera de resposta da URL excedeu',
+          'Tempo de espera de resposta da URL excedeu. Tente reiniciar o aplicativo.',
           408,
         ); // Request Timeout response status code
       },

@@ -23,7 +23,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesUnidade() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",
@@ -48,7 +48,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesGeral() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}&idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",
@@ -70,7 +70,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoUnidade() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",
@@ -92,7 +92,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoGeral() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}&idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",

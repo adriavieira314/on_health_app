@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/providers/indicadores_provider.dart';
+import 'package:on_health_app/providers/municipios_provider.dart';
 import 'package:on_health_app/services/notification_service.dart';
 import 'package:on_health_app/utils/app_routes.dart';
 import 'package:on_health_app/utils/constants.dart';
@@ -16,6 +17,7 @@ void main() async {
   prefs = await SharedPreferences.getInstance();
   getServer();
   getTempoBuscaAgenda();
+  getIdIBGE();
 
   // configuração para manter dispositivo em landscape
   SystemChrome.setPreferredOrientations([
@@ -44,6 +46,9 @@ void main() async {
                 auth.token ?? '',
               );
             },
+          ),
+          ChangeNotifierProvider(
+            create: (_) => MunicipiosProvider(),
           ),
           Provider<NotificationService>(
             create: (context) => NotificationService(),

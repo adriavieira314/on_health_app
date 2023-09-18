@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String serverURL = "";
 int tempoBuscaAgenda = 5;
 dynamic cancelTimer;
+String? idIBGE;
 
 void getServer() async {
   final prefs = await SharedPreferences.getInstance();
@@ -28,5 +29,15 @@ void getTempoBuscaAgenda() async {
     tempoBuscaAgenda = 5;
   } else {
     tempoBuscaAgenda = int.parse(prefs.getString('tempoChaveamento')!);
+  }
+}
+
+void getIdIBGE() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (prefs.getString('idIBGE') == null) {
+    idIBGE = '';
+  } else {
+    idIBGE = prefs.getString('idIBGE');
   }
 }
