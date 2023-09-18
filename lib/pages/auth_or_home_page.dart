@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_health_app/pages/home/admin/menu_admin_page.dart';
 import 'package:on_health_app/pages/home/user/menu_user_page.dart';
 import 'package:on_health_app/pages/login/login_page.dart';
-import 'package:on_health_app/pages/select_municipio.dart';
+import 'package:on_health_app/pages/select_municipio_page.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/utils/constants.dart';
 import 'package:provider/provider.dart';
