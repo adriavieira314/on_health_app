@@ -58,6 +58,12 @@ class Agendamentos {
   String? unidadeSaude;
   String? dsCBO;
   String? nmProfSaude;
+  int? stAgendamento;
+  String? dtStAgendamento;
+  String? hrStAgendamento;
+  int? stNotificacao;
+  String? dtNotificacao;
+  String? hrNotificacao;
   bool? pushSent;
 
   Agendamentos({
@@ -71,6 +77,12 @@ class Agendamentos {
     this.unidadeSaude,
     this.dsCBO,
     this.nmProfSaude,
+    this.stAgendamento,
+    this.dtStAgendamento,
+    this.hrStAgendamento,
+    this.stNotificacao,
+    this.dtNotificacao,
+    this.hrNotificacao,
     this.pushSent,
   });
 
@@ -85,6 +97,12 @@ class Agendamentos {
     unidadeSaude = json['unidadeSaude'];
     dsCBO = json['dsCBO'];
     nmProfSaude = json['nmProfSaude'];
+    stAgendamento = json['stAgendamento'];
+    dtStAgendamento = json['dtStAgendamento'];
+    hrStAgendamento = json['hrStAgendamento'];
+    stNotificacao = json['stNotificacao'];
+    dtNotificacao = json['dtNotificacao'];
+    hrNotificacao = json['hrNotificacao'];
     pushSent = json['pushSent'];
   }
 
@@ -100,6 +118,12 @@ class Agendamentos {
     data['unidadeSaude'] = this.unidadeSaude;
     data['dsCBO'] = this.dsCBO;
     data['nmProfSaude'] = this.nmProfSaude;
+    data['stAgendamento'] = this.stAgendamento;
+    data['dtStAgendamento'] = this.dtStAgendamento;
+    data['hrStAgendamento'] = this.hrStAgendamento;
+    data['stNotificacao'] = this.stNotificacao;
+    data['dtNotificacao'] = this.dtNotificacao;
+    data['hrNotificacao'] = this.hrNotificacao;
     data['pushSent'] = this.pushSent;
     return data;
   }

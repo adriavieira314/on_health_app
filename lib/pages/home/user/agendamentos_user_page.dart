@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:on_health_app/exceptions/http_exception.dart';
 import 'package:on_health_app/models/agendamentos.dart';
 import 'package:on_health_app/providers/agendamentos_provider.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,8 @@ class AgendamentosUserPage extends StatefulWidget {
 
 class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
   bool loading = true;
+  bool _isButtonConfirma = false;
+  bool _isButtonCancela = false;
 
   @override
   void initState() {
@@ -25,6 +28,47 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
         loading = false;
       });
     });
+  }
+
+  void _showErrorDialog(String msg) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ocorreu um Erro'),
+        content: Text(msg),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _changeStatus(stts, id, cpf, agendamento) async {
+    setState(
+      () => stts == 1 ? _isButtonConfirma = true : _isButtonCancela = true,
+    );
+
+    AgendamentosProvider agendamentos = Provider.of(context, listen: false);
+
+    try {
+      await agendamentos.changeAgendamentoStatus(stts, id, cpf);
+      setState(() {
+        agendamento.stAgendamento = stts;
+      });
+    } on HttpException catch (error) {
+      _showErrorDialog(error.toString());
+    } catch (error) {
+      _showErrorDialog(
+          'Ocorreu um erro no processo. $error Entre em contato com suporte técnico.');
+    }
+
+    setState(
+      () => stts == 1 ? _isButtonConfirma = false : _isButtonCancela = false,
+    );
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override
@@ -106,23 +150,67 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     ElevatedButton(
-                                      onPressed: () => {},
+                                      onPressed: agendamento.stAgendamento == 0
+                                          ? () => {
+                                                _changeStatus(
+                                                  1,
+                                                  agendamento.id,
+                                                  agendamento.cpf,
+                                                  agendamento,
+                                                ),
+                                              }
+                                          : agendamento.stAgendamento == 1
+                                              ? null
+                                              : () => {
+                                                    _changeStatus(
+                                                      1,
+                                                      agendamento.id,
+                                                      agendamento.cpf,
+                                                      agendamento,
+                                                    ),
+                                                  },
                                       style: ElevatedButton.styleFrom(
                                         shape: const StadiumBorder(),
                                         minimumSize: const Size(100, 40),
                                       ),
-                                      child: const Text('Confirmar'),
+                                      child: !_isButtonConfirma
+                                          ? Text('Confirmar')
+                                          : CircularProgressIndicator(
+                                              color: Colors.white,
+                                            ),
                                     ),
                                     const SizedBox(width: 8),
                                     ElevatedButton(
-                                      onPressed: () => {},
+                                      onPressed: agendamento.stAgendamento == 0
+                                          ? () => {
+                                                _changeStatus(
+                                                  2,
+                                                  agendamento.id,
+                                                  agendamento.cpf,
+                                                  agendamento,
+                                                ),
+                                              }
+                                          : agendamento.stAgendamento == 2
+                                              ? null
+                                              : () => {
+                                                    _changeStatus(
+                                                      2,
+                                                      agendamento.id,
+                                                      agendamento.cpf,
+                                                      agendamento,
+                                                    ),
+                                                  },
                                       style: ElevatedButton.styleFrom(
                                         shape: const StadiumBorder(),
                                         minimumSize: const Size(100, 40),
                                         backgroundColor:
                                             Theme.of(context).colorScheme.error,
                                       ),
-                                      child: const Text('Cancelar'),
+                                      child: !_isButtonCancela
+                                          ? Text('Cancelar')
+                                          : CircularProgressIndicator(
+                                              color: Colors.white,
+                                            ),
                                     ),
                                   ],
                                 ),
