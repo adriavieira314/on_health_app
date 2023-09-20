@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_health_app/main.dart';
 import 'package:on_health_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:on_health_app/utils/app_routes.dart';
 
 class ServerPage extends StatefulWidget {
   const ServerPage({super.key});
@@ -20,6 +21,13 @@ class _ServerPageState extends State<ServerPage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
+    prefs.getString('server') != null
+        ? serverController.text = prefs.getString('server')!
+        : serverController.text = "";
+
+    prefs.getString('port') != null
+        ? portController.text = prefs.getString('port')!
+        : portController.text = "";
 
     return Scaffold(
       body: SafeArea(
@@ -53,10 +61,11 @@ class _ServerPageState extends State<ServerPage> {
                         ),
                         TextFormField(
                           decoration: const InputDecoration(
-                            hintText: '000.000.0.000',
+                            hintText: 'Ex.: 000.000.0.000',
                             border: OutlineInputBorder(),
                           ),
                           controller: serverController,
+                          keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) {
                             FocusScope.of(context).requestFocus(_portaFocus);
@@ -137,7 +146,8 @@ class _ServerPageState extends State<ServerPage> {
                             _prefs.setString('port', portController.text);
                             getServer();
                             setState(() => _isLoading = true);
-                            RestartWidget.restartApp(context);
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.MUNICIPIOS);
                           }
                         },
                         child: const Text(
