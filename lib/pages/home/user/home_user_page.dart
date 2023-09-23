@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_health_app/components/home/text_info.dart';
+import 'package:on_health_app/components/tabBarInfo.dart';
 import 'package:on_health_app/models/custom_notification.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/services/notification_service.dart';
@@ -139,62 +140,14 @@ class _HomeUserPageState extends State<HomeUserPage> {
                         child: TabBarView(
                           children: [
                             if (userDiabetes != null)
-                              Column(
-                                children: [
-                                  TextInfo(
-                                    label: 'Unidade de Saúde: ',
-                                    info: userDiabetes['unidadeSaude']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Médico: ',
-                                    info: userDiabetes['nomeProfissional']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Último atendimento: ',
-                                    info: userDiabetes['dtUltAtendimento']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Valor da Glicemia: ',
-                                    info: userDiabetes['glicemia']!.toString(),
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Medicação recebida: ',
-                                    info: userDiabetes['medicacao']!,
-                                  ),
-                                ],
+                              TabBarInfo(
+                                userCondicaoMedica: userDiabetes,
+                                tipo: 1,
                               ),
                             if (userHipertenso != null)
-                              Column(
-                                children: [
-                                  TextInfo(
-                                    label: 'Unidade de Saúde: ',
-                                    info: userHipertenso['unidadeSaude']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Médico: ',
-                                    info: userHipertenso['nomeProfissional']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Último atendimento: ',
-                                    info: userHipertenso['dtUltAtendimento']!,
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Pressão: ',
-                                    info: userHipertenso['pressao']!.toString(),
-                                  ),
-                                  const Divider(),
-                                  TextInfo(
-                                    label: 'Medicação recebida: ',
-                                    info: userHipertenso['medicacao']!,
-                                  ),
-                                ],
+                              TabBarInfo(
+                                userCondicaoMedica: userHipertenso,
+                                tipo: 2,
                               ),
                           ],
                         ),

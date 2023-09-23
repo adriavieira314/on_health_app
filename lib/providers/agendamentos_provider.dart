@@ -12,8 +12,14 @@ class AgendamentosProvider with ChangeNotifier {
   String? _cnes;
   ListaAgendamentos? _listaAgendamentosUsuario;
   ListaAgendamentos? _listaAgendamentosGestor;
+  dynamic _dadosHipertensao;
+  dynamic _dadosDiabetes;
 
   AgendamentosProvider(this._token, this._cpf, this._cnes);
+
+  get dadosHipertensao => _dadosHipertensao;
+
+  get dadosDiabetes => _dadosDiabetes;
 
   ListaAgendamentos? get listaAgendamentosUsuario => _listaAgendamentosUsuario;
   ListaAgendamentos? get listaAgendamentosGestor => _listaAgendamentosGestor;
@@ -82,6 +88,31 @@ class AgendamentosProvider with ChangeNotifier {
         'Não foi possivel alterar o status do servidor.',
       );
     }
+
+    notifyListeners();
+  }
+
+  Future<void> getUltimoAtendimento(String cpf) async {
+    final response = await http.get(
+      Uri.parse(
+        '$serverURL/onhealth/rest/consultas/cidadao/ultimosatendimentosgeral?cpf=$cpf&idIBGE=$idIBGE',
+      ),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw HttpException(
+        'Não foi possivel buscar informação dos ultimos atendimentos do paciente.',
+      );
+    }
+
+    final body = jsonDecode(utf8.decode(response.bodyBytes));
+    _dadosHipertensao = body['hipertensao'];
+    _dadosDiabetes = body['diabetes'];
 
     notifyListeners();
   }
