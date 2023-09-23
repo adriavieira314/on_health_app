@@ -8,6 +8,7 @@ import 'package:on_health_app/utils/constants.dart';
 
 class IndicadoresProvider with ChangeNotifier {
   String? _token;
+  String? _cnes;
   Indicador? _indicadorDiabetesUnidade;
   Indicador? _indicadorDiabetesGeral;
   Indicador? _indicadorHipertensaoUnidade;
@@ -17,7 +18,7 @@ class IndicadoresProvider with ChangeNotifier {
   Indicador? _indicadorAcessoDiabetesUnidade;
   Indicador? _indicadorAcessoDiabetesGeral;
 
-  IndicadoresProvider(this._token);
+  IndicadoresProvider(this._token, this._cnes);
 
   Indicador? get indicDiabetesUnidade => _indicadorDiabetesUnidade;
   Indicador? get indicDiabetesGeral => _indicadorDiabetesGeral;
@@ -33,6 +34,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesUnidade() async {
     final response = await http.get(
       Uri.parse(
+        // '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=$_cnes&idIBGE=$idIBGE',
         '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {
@@ -46,12 +48,10 @@ class IndicadoresProvider with ChangeNotifier {
       _indicadorDiabetesUnidade =
           Indicador.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
 
-      print('_indicadorDiabetesUnidade');
-      print(_indicadorDiabetesUnidade);
-
       notifyListeners();
     } else {
-      throw HttpException('Não foi possivel fazer a requisição.');
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador diabetes unidade.');
     }
   }
 
@@ -73,13 +73,15 @@ class IndicadoresProvider with ChangeNotifier {
 
       notifyListeners();
     } else {
-      throw HttpException('Não foi possivel fazer a requisição.');
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador diabetes geral.');
     }
   }
 
   Future<void> indicadorHipertensaoUnidade() async {
     final response = await http.get(
       Uri.parse(
+        // '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=$_cnes&idIBGE=$idIBGE',
         '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {
@@ -95,7 +97,8 @@ class IndicadoresProvider with ChangeNotifier {
 
       notifyListeners();
     } else {
-      throw HttpException('Não foi possivel fazer a requisição.');
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador hipertensao unidade');
     }
   }
 
@@ -117,13 +120,15 @@ class IndicadoresProvider with ChangeNotifier {
 
       notifyListeners();
     } else {
-      throw HttpException('Não foi possivel fazer a requisição.');
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador hipertensão geral');
     }
   }
 
   Future<void> indicadorAcessoHipertensaoUnidade() async {
     final response = await http.get(
       Uri.parse(
+        // '$serverURL/onhealth/rest/consultas/gestor/indicadoracessohipertensao?cnes=$_cnes&idIBGE=$idIBGE',
         '$serverURL/onhealth/rest/consultas/gestor/indicadoracessohipertensao?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {
@@ -170,6 +175,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorAcessoDiabetesUnidade() async {
     final response = await http.get(
       Uri.parse(
+        // '$serverURL/onhealth/rest/consultas/gestor/indicadoracessodiabetes?cnes=$_cnes&idIBGE=$idIBGE',
         '$serverURL/onhealth/rest/consultas/gestor/indicadoracessodiabetes?cnes=2708868&idIBGE=$idIBGE',
       ),
       headers: {

@@ -36,7 +36,11 @@ class AgendamentosProvider with ChangeNotifier {
       },
     );
 
-    if (response.body == 'null' || response.body == null) return;
+    if (response.statusCode != 200) {
+      throw HttpException(
+        'Não foi possivel buscar agendamentos do usuario.',
+      );
+    }
 
     _listaAgendamentosUsuario =
         ListaAgendamentos.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
@@ -57,7 +61,11 @@ class AgendamentosProvider with ChangeNotifier {
       },
     );
 
-    if (response.body == 'null' || response.body == null) return;
+    if (response.statusCode != 200) {
+      throw HttpException(
+        'Não foi possivel buscar agendamentos do gestor.',
+      );
+    }
 
     _listaAgendamentosGestor =
         ListaAgendamentos.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));

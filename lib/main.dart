@@ -40,10 +40,11 @@ void main() async {
             },
           ),
           ChangeNotifierProxyProvider<AuthProvider, IndicadoresProvider>(
-            create: (_) => IndicadoresProvider(''),
+            create: (_) => IndicadoresProvider('', ''),
             update: (ctx, auth, previousProductList) {
               return IndicadoresProvider(
                 auth.token ?? '',
+                auth.cnes,
               );
             },
           ),
