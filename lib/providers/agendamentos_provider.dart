@@ -60,9 +60,6 @@ class AgendamentosProvider with ChangeNotifier {
   }
 
   Future<void> changeAgendamentoStatus(int stts, int id, String cpf) async {
-    print(stts);
-    print(id);
-    print(cpf);
     final url =
         '$serverURL/onhealth/rest/consultas/cidadao/proximosatendimentos/alterarstatus';
 
