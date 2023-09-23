@@ -10,14 +10,14 @@ class ChartData {
   final double y;
 }
 
-class GraphPage extends StatefulWidget {
-  const GraphPage({super.key});
+class DcntGraphPage extends StatefulWidget {
+  const DcntGraphPage({super.key});
 
   @override
-  State<GraphPage> createState() => _GraphPageState();
+  State<DcntGraphPage> createState() => _DcntGraphPageState();
 }
 
-class _GraphPageState extends State<GraphPage>
+class _DcntGraphPageState extends State<DcntGraphPage>
     with SingleTickerProviderStateMixin {
   final List<bool> loadDiabetesGraph = [false, false];
   final List<bool> loadHipertensaoGraph = [false, false];

@@ -12,6 +12,10 @@ class IndicadoresProvider with ChangeNotifier {
   Indicador? _indicadorDiabetesGeral;
   Indicador? _indicadorHipertensaoUnidade;
   Indicador? _indicadorHipertensaoGeral;
+  Indicador? _indicadorAcessoHipertensaoUnidade;
+  Indicador? _indicadorAcessoHipertensaoGeral;
+  Indicador? _indicadorAcessoDiabetesUnidade;
+  Indicador? _indicadorAcessoDiabetesGeral;
 
   IndicadoresProvider(this._token);
 
@@ -19,6 +23,12 @@ class IndicadoresProvider with ChangeNotifier {
   Indicador? get indicDiabetesGeral => _indicadorDiabetesGeral;
   Indicador? get indicHipertensaoUnidade => _indicadorHipertensaoUnidade;
   Indicador? get indicHipertensaoGeral => _indicadorHipertensaoGeral;
+  Indicador? get indicAcessoHipertensaoUnidade =>
+      _indicadorAcessoHipertensaoUnidade;
+  Indicador? get indicAcessoHipertensaoGeral =>
+      _indicadorAcessoHipertensaoGeral;
+  Indicador? get indicAcessoDiabetesUnidade => _indicadorAcessoDiabetesUnidade;
+  Indicador? get indicAcessoDiabetesGeral => _indicadorAcessoDiabetesGeral;
 
   Future<void> indicadorDiabetesUnidade() async {
     final response = await http.get(
@@ -48,7 +58,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorDiabetesGeral() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?cnes=${''}&idIBGE=$idIBGE',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadordiabetes?idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",
@@ -92,7 +102,7 @@ class IndicadoresProvider with ChangeNotifier {
   Future<void> indicadorHipertensaoGeral() async {
     final response = await http.get(
       Uri.parse(
-        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?cnes=${''}&idIBGE=$idIBGE',
+        '$serverURL/onhealth/rest/consultas/gestor/indicadorhipertensao?idIBGE=$idIBGE',
       ),
       headers: {
         "Accept": "application/json",
@@ -108,6 +118,98 @@ class IndicadoresProvider with ChangeNotifier {
       notifyListeners();
     } else {
       throw HttpException('Não foi possivel fazer a requisição.');
+    }
+  }
+
+  Future<void> indicadorAcessoHipertensaoUnidade() async {
+    final response = await http.get(
+      Uri.parse(
+        '$serverURL/onhealth/rest/consultas/gestor/indicadoracessohipertensao?cnes=2708868&idIBGE=$idIBGE',
+      ),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      _indicadorAcessoHipertensaoUnidade =
+          Indicador.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+
+      notifyListeners();
+    } else {
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador acesso hipertensao unidade.');
+    }
+  }
+
+  Future<void> indicadorAcessoHipertensaoGeral() async {
+    final response = await http.get(
+      Uri.parse(
+        '$serverURL/onhealth/rest/consultas/gestor/indicadoracessohipertensao?idIBGE=$idIBGE',
+      ),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      _indicadorAcessoHipertensaoGeral =
+          Indicador.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+
+      notifyListeners();
+    } else {
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador acesso hipertensao geral');
+    }
+  }
+
+  Future<void> indicadorAcessoDiabetesUnidade() async {
+    final response = await http.get(
+      Uri.parse(
+        '$serverURL/onhealth/rest/consultas/gestor/indicadoracessodiabetes?cnes=2708868&idIBGE=$idIBGE',
+      ),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      _indicadorAcessoDiabetesUnidade =
+          Indicador.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+
+      notifyListeners();
+    } else {
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador acesso diabetes unidade.');
+    }
+  }
+
+  Future<void> indicadorAcessoDiabetesGeral() async {
+    final response = await http.get(
+      Uri.parse(
+        '$serverURL/onhealth/rest/consultas/gestor/indicadoracessodiabetes?idIBGE=$idIBGE',
+      ),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      _indicadorAcessoDiabetesGeral =
+          Indicador.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+
+      notifyListeners();
+    } else {
+      throw HttpException(
+          'Não foi possivel fazer a requisição: indicador acesso diabetes geral');
     }
   }
 }

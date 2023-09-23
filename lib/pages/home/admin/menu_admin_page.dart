@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/pages/home/admin/graph_page.dart';
+import 'package:on_health_app/pages/home/admin/acesso_graph_page%20copy.dart';
+import 'package:on_health_app/pages/home/admin/dcnt_graph_page.dart';
 import 'package:on_health_app/pages/home/admin/home_admin_page.dart';
 
 class MenuAdminPage extends StatefulWidget {
@@ -13,7 +14,8 @@ class _MenuAdminPageState extends State<MenuAdminPage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeAdminPage(),
-    GraphPage(),
+    DcntGraphPage(),
+    AcessoGraphPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,7 +39,11 @@ class _MenuAdminPageState extends State<MenuAdminPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.query_stats_outlined),
-            label: 'Análise de Dados',
+            label: 'DCNT.s (HAS/DM)',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.analytics_outlined),
+            label: 'ACESSO',
           ),
         ],
         currentIndex: _selectedIndex,
