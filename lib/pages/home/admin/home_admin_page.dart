@@ -166,7 +166,15 @@ class _HomeAdminPageState extends State<HomeAdminPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    color: Colors.green,
+                                                    color: agendamento
+                                                                .stAgendamento ==
+                                                            0
+                                                        ? Colors.orange
+                                                        : agendamento
+                                                                    .stAgendamento ==
+                                                                1
+                                                            ? Colors.green
+                                                            : Colors.red,
                                                   ),
                                                   height: 10,
                                                   width: 50,
