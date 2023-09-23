@@ -38,9 +38,8 @@ class _MenuUserPageState extends State<MenuUserPage> {
 
   @override
   void initState() {
-    print('tempoBuscaAgenda');
-    print(tempoBuscaAgenda);
     super.initState();
+
     if (mounted) {
       cancelTimer = Timer.periodic(
         Duration(minutes: tempoBuscaAgenda),
