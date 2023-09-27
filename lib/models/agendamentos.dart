@@ -64,7 +64,6 @@ class Agendamentos {
   int? stNotificacao;
   String? dtNotificacao;
   String? hrNotificacao;
-  bool? pushSent;
 
   Agendamentos({
     this.id,
@@ -83,7 +82,6 @@ class Agendamentos {
     this.stNotificacao,
     this.dtNotificacao,
     this.hrNotificacao,
-    this.pushSent,
   });
 
   Agendamentos.fromJson(Map<String, dynamic> json) {
@@ -103,7 +101,6 @@ class Agendamentos {
     stNotificacao = json['stNotificacao'];
     dtNotificacao = json['dtNotificacao'];
     hrNotificacao = json['hrNotificacao'];
-    pushSent = json['pushSent'];
   }
 
   Map<String, dynamic> toJson() {
@@ -124,7 +121,6 @@ class Agendamentos {
     data['stNotificacao'] = this.stNotificacao;
     data['dtNotificacao'] = this.dtNotificacao;
     data['hrNotificacao'] = this.hrNotificacao;
-    data['pushSent'] = this.pushSent;
     return data;
   }
 }

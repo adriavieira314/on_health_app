@@ -93,7 +93,33 @@ class AgendamentosProvider with ChangeNotifier {
 
     if (response.statusCode != 200) {
       throw HttpException(
-        'Não foi possivel alterar o status do servidor.',
+        'Não foi possivel alterar o status do agendamento.',
+      );
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> changeNotificacaoStatus(int id, String cpf) async {
+    final url =
+        '$serverURL/onhealth/rest/consultas/cidadao/proximosatendimentos/sinalizarnotificacao';
+
+    final response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode({
+        "idAgendamento": id,
+        "cpf": cpf,
+      }),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $_token"
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw HttpException(
+        'Não foi possivel alterar o status da notificação.',
       );
     }
 
