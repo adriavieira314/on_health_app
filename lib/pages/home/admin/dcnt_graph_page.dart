@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/components/app_graph.dart';
+import 'package:on_health_app/components/app_dcnt_graph.dart';
 import 'package:on_health_app/providers/auth_provider.dart';
 import 'package:on_health_app/providers/indicadores_provider.dart';
 import 'package:provider/provider.dart';
@@ -188,7 +188,7 @@ class _DcntGraphPageState extends State<DcntGraphPage>
                         controller: _tabController,
                         children: [
                           loadDiabetesGraph.every((value) => value == true)
-                              ? AppGraphDiabetes(
+                              ? AppGraphDcntDiabetes(
                                   diabetesValueGeral: providerIndicadores
                                           .indicDiabetesGeral?.indice ??
                                       0.0,
@@ -200,7 +200,7 @@ class _DcntGraphPageState extends State<DcntGraphPage>
                                   child: CircularProgressIndicator(),
                                 ),
                           loadHipertensaoGraph.every((value) => value == true)
-                              ? AppGraphHipertensao(
+                              ? AppGraphDcntHipertensao(
                                   hipertensaoValueGeral: providerIndicadores
                                           .indicHipertensaoGeral?.indice ??
                                       0.0,

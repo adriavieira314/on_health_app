@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/pages/home/admin/acesso_graph_page%20copy.dart';
+import 'package:on_health_app/pages/home/admin/acesso_graph_page.dart';
 import 'package:on_health_app/pages/home/admin/dcnt_graph_page.dart';
 import 'package:on_health_app/pages/home/admin/home_admin_page.dart';
 

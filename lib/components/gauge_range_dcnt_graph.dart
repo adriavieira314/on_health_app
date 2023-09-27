@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class GaugeRangeGraph extends StatelessWidget {
+class GaugeRangeDcntGraph extends StatelessWidget {
   final double? value;
 
-  const GaugeRangeGraph({super.key, this.value});
+  const GaugeRangeDcntGraph({super.key, this.value});
 
   @override
   Widget build(BuildContext context) {

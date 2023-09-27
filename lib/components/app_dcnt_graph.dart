@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:on_health_app/components/gauge_range_graph.dart';
+import 'package:on_health_app/components/gauge_range_dcnt_graph.dart';
 
-class AppGraphDiabetes extends StatelessWidget {
+class AppGraphDcntDiabetes extends StatelessWidget {
   final double? diabetesValueUnid;
   final double? diabetesValueGeral;
 
-  const AppGraphDiabetes({
+  const AppGraphDcntDiabetes({
     super.key,
     this.diabetesValueUnid,
     this.diabetesValueGeral,
@@ -23,7 +23,7 @@ class AppGraphDiabetes extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('0.0%'),
-            GaugeRangeGraph(
+            GaugeRangeDcntGraph(
               value: diabetesValueUnid,
             ),
             const Text('100.0%'),
@@ -37,7 +37,7 @@ class AppGraphDiabetes extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('0.0%'),
-            GaugeRangeGraph(
+            GaugeRangeDcntGraph(
               value: diabetesValueGeral,
             ),
             const Text('100.0%'),
@@ -48,11 +48,11 @@ class AppGraphDiabetes extends StatelessWidget {
   }
 }
 
-class AppGraphHipertensao extends StatelessWidget {
+class AppGraphDcntHipertensao extends StatelessWidget {
   final double? hipertensaoValueUnid;
   final double? hipertensaoValueGeral;
 
-  const AppGraphHipertensao({
+  const AppGraphDcntHipertensao({
     super.key,
     this.hipertensaoValueUnid,
     this.hipertensaoValueGeral,
@@ -70,7 +70,7 @@ class AppGraphHipertensao extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('0.0%'),
-            GaugeRangeGraph(
+            GaugeRangeDcntGraph(
               value: hipertensaoValueUnid,
             ),
             const Text('100.0%'),
@@ -84,7 +84,7 @@ class AppGraphHipertensao extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('0.0%'),
-            GaugeRangeGraph(
+            GaugeRangeDcntGraph(
               value: hipertensaoValueGeral,
             ),
             const Text('100.0%'),
