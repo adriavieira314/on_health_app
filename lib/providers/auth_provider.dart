@@ -175,6 +175,8 @@ class AuthProvider with ChangeNotifier {
     _unidadeSaude = null;
     _dsCBO = null;
 
+    cancelTimer != null ? cancelTimer.cancel() : '';
+
     Store.remove('userData');
   }
 }

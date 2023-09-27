@@ -82,7 +82,7 @@ class _AgendamentosUserPageState extends State<AgendamentosUserPage> {
         ? Center(
             child: CircularProgressIndicator(),
           )
-        : listaAgendamentos == null
+        : listaAgendamentos!.agendamentos!.length == 0
             ? Center(
                 child: Text(
                   'Sem agendamentos',
