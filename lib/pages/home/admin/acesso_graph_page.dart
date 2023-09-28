@@ -195,6 +195,22 @@ class _AcessoGraphPageState extends State<AcessoGraphPage>
                                   diabetesValueUnid: providerIndicadores
                                           .indicAcessoDiabetesUnidade?.indice ??
                                       0.0,
+                                  demandaProgramaUnid: providerIndicadores
+                                          .indicAcessoDiabetesUnidade
+                                          ?.demandaProgramada ??
+                                      0,
+                                  demandaEspontaneaUnid: providerIndicadores
+                                          .indicAcessoDiabetesUnidade
+                                          ?.deamandaEspontanea ??
+                                      0,
+                                  demandaProgramaGeral: providerIndicadores
+                                          .indicAcessoDiabetesGeral
+                                          ?.demandaProgramada ??
+                                      0,
+                                  demandaEspontaneaGeral: providerIndicadores
+                                          .indicAcessoDiabetesGeral
+                                          ?.deamandaEspontanea ??
+                                      0,
                                 )
                               : Center(
                                   child: CircularProgressIndicator(),
@@ -209,6 +225,22 @@ class _AcessoGraphPageState extends State<AcessoGraphPage>
                                           .indicAcessoHipertensaoUnidade
                                           ?.indice ??
                                       0.0,
+                                  demandaProgramaUnid: providerIndicadores
+                                          .indicAcessoHipertensaoUnidade
+                                          ?.demandaProgramada ??
+                                      0,
+                                  demandaEspontaneaUnid: providerIndicadores
+                                          .indicAcessoHipertensaoUnidade
+                                          ?.deamandaEspontanea ??
+                                      0,
+                                  demandaProgramaGeral: providerIndicadores
+                                          .indicAcessoHipertensaoGeral
+                                          ?.demandaProgramada ??
+                                      0,
+                                  demandaEspontaneaGeral: providerIndicadores
+                                          .indicAcessoHipertensaoGeral
+                                          ?.deamandaEspontanea ??
+                                      0,
                                 )
                               : Center(
                                   child: CircularProgressIndicator(),
