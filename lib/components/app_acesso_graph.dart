@@ -30,7 +30,7 @@ class AppGraphAcessoDiabetes extends StatelessWidget {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -47,13 +47,13 @@ class AppGraphAcessoDiabetes extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 60),
           Text(
             'Geral Secretaria',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -96,54 +96,57 @@ class AppGraphAcessoHipertensao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Unidade',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  Demanda('Demanda Programada', demandaProgramaUnid!),
-                  SizedBox(height: 10),
-                  Demanda('Demanda Espontânea', demandaEspontaneaUnid!),
-                ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+      child: Column(
+        children: [
+          Text(
+            'Unidade',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Demanda('Demanda Programada', demandaProgramaUnid!),
+                    SizedBox(height: 10),
+                    Demanda('Demanda Espontânea', demandaEspontaneaUnid!),
+                  ],
+                ),
               ),
-            ),
-            GaugeRangeAcessoGraph(
-              value: hipertensaoValueUnid,
-            ),
-          ],
-        ),
-        SizedBox(height: 40),
-        Text(
-          'Geral Secretaria',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              child: Column(
-                children: [
-                  Demanda('Demanda Programada', demandaProgramaGeral!),
-                  SizedBox(height: 10),
-                  Demanda('Demanda Espontânea', demandaEspontaneaGeral!),
-                ],
+              GaugeRangeAcessoGraph(
+                value: hipertensaoValueUnid,
               ),
-            ),
-            GaugeRangeAcessoGraph(
-              value: hipertensaoValueGeral,
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+          SizedBox(height: 60),
+          Text(
+            'Geral Secretaria',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Demanda('Demanda Programada', demandaProgramaGeral!),
+                    SizedBox(height: 10),
+                    Demanda('Demanda Espontânea', demandaEspontaneaGeral!),
+                  ],
+                ),
+              ),
+              GaugeRangeAcessoGraph(
+                value: hipertensaoValueGeral,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

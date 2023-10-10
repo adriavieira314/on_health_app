@@ -9,8 +9,8 @@ class GaugeRangeAcessoGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 230,
-      height: 230,
+      width: 180,
+      height: 180,
       child: SfRadialGauge(
         axes: <RadialAxis>[
           RadialAxis(

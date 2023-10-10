@@ -142,14 +142,6 @@ class _AcessoGraphPageState extends State<AcessoGraphPage>
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
-                    child: Image.asset(
-                      'assets/images/previne-brasil.jpeg',
-                      width: 40,
-                      height: 40,
-                    ),
-                  ),
-                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 18.0),
                     child: Center(
                       child: Text(
