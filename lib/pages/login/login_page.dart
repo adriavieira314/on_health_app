@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SizedBox(
             height: mediaQuery.size.height - safeAreaHeight - appHeight,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
@@ -108,8 +108,24 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Pesquisa desenvolvida na Universidade Federal de Santa Catarina',
+                          style: TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/images/ufsc.png',
+                          width: 100,
+                          height: 100,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 50),
                     if (!_isAdmin)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
