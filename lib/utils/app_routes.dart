@@ -7,6 +7,7 @@ import 'package:on_health_app/pages/home/admin/menu_admin_page.dart';
 import 'package:on_health_app/pages/home/user/menu_user_page.dart';
 import 'package:on_health_app/pages/select_municipio_page.dart';
 import 'package:on_health_app/pages/server_page.dart';
+import 'package:on_health_app/pages/sobre.dart';
 
 class AppRoutes {
   static const AUTH_OR_HOME = '/';
@@ -15,6 +16,7 @@ class AppRoutes {
   static const PATIENT_INFO = '/patient_info';
   static const SERVIDOR = '/servidor';
   static const MUNICIPIOS = '/municipios';
+  static const SOBRE = '/sobre';
 }
 
 class Routes {
@@ -26,6 +28,7 @@ class Routes {
     AppRoutes.PATIENT_INFO: (ctx) => const PatientInfo(),
     AppRoutes.SERVIDOR: (ctx) => const ServerPage(),
     AppRoutes.MUNICIPIOS: (ctx) => const SelectMunicipioPage(),
+    AppRoutes.SOBRE: (ctx) => const SobrePage(),
   };
 
   static String initial = AppRoutes.AUTH_OR_HOME;
